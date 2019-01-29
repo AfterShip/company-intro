@@ -50,12 +50,13 @@ pre, a {
 
 pre {
   width:47%;
-  background: rgb(48, 48, 48);
+  background: #252f33;
   transform: translateX(95%);
   font-family: monospace;
   white-space: pre-wrap;
   outline: 0;
-  margin: 12px;
+	margin: 12px;
+	border-radius: 6px;
 }
 
 
@@ -64,12 +65,12 @@ pre {
  * 让我们把它们更好阅读吧
  */
 
-.comment       { color: #857F6B; font-style: italic; }
-.selector      { color: #E69F0F; }
-.selector .key { color: #64D5EA; }
-.key           { color: #64D5EA; }
-.value         { color: #BE84F2; }
-.value.px      { color: #F92772; }
+.comment       { color: #6a9955; font-style: italic; }
+.selector      { color: #d7ba7d; }
+.selector .key { color: #9cdcfe; }
+.key           { color: #9cdcfe; }
+.value         { color: #ce9178; }
+.value.px      { color: #ce9178; }
 
 
 /**
@@ -83,7 +84,7 @@ pre {
 }
 
 html {
-  background:rgb(48, 48, 48);
+  background: #252f33;
 }
 
 
