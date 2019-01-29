@@ -1,47 +1,23 @@
 
 /**
- * We're almost done.
+ * The text could use some tweaks.
  */
 
- pre:hover{
-   box-shadow: 0px 0px 40px 5px rgba(255,255,255,0.4);
- }
-
- #skip-animation, #pause-resume {
-   display: none;
- }
-
-/**
- * I hope you enjoyed this.
- *
- * Thanks to Jake Albaugh, who was the first (that I know of) to do
- * a page like this. Some of the autotyping and syntax highlighting
- * code is based off his work.
- *
- * See more of Jake's work at http://codepen.io/jakealbaugh/
- */
-
-/**
- * By the way, you can edit this box. Try adding new CSS!
- *
- * For example,
- *
- * The property 'text-shadow' takes the parameters:
- * 'x', 'y', 'blur', 'color'.
- *
- * So if I wanted to mirror the values,
- * I could place a shadow 15px under it,
- * with a little blur for effect:
- */
-
-.value {
-  text-shadow: 0px 15px 1px white;
+.md {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
-/**
- * Try it out! There's lots you can do.
- * Try playing with text sizes, shadows, animations, or just
- * break the page. I won't hold it against you.
- */
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6 {
+  display: inline-block;
+  color: #ddd;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
 
+.md li {
+  margin: 5px 0;
+}
 
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6, .md ul, .md p {
+  margin: 0px;
+}
