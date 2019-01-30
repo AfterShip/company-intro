@@ -1,12 +1,9 @@
 
- '$blockMob'
-
- #intro-text {
+'$blockMob'
+#intro-text {
   margin-top: '$introMarginTop';
   background: rgb(34,43,52);
   height: '$introH';
-  color: #fff;
 }
-#intro-text .md{
-  color: #fff;
-}
+
+#work-text, #style-text { max-height: '$maxH'; }

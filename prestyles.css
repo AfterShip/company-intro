@@ -1,157 +1,164 @@
 /* I'm cheating a bit */
 
 html, body {
-  margin-top: 0;
-  height: 100%;
-  overflow: hidden;
-  font-size: 14px;
+	margin-top: 0;
+	height: 100%;
+	overflow: hidden;
+	font-size: 14px;
 }
+
 body {
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  padding: 12px '$bodyPaddingLeftRig' 20px;
+	-webkit-perspective: 1000px;
+	perspective: 1000px;
+	padding: 12px '$bodyPaddingLeftRig' 20px;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 pre {
-  margin:0;
-  overflow: auto;
-  max-height: 90%;
-  width: 100%;
-  border-radius: 3px; /* Prevents bad clipping in Chrome */
-  white-space: pre-wrap;
-  -webkit-overflow-scrolling: touch;
+	margin: 0;
+	overflow: auto;
+	max-height: 90%;
+	width: 100%;
+	border-radius: 3px;
+	/* Prevents bad clipping in Chrome */
+	white-space: pre-wrap;
+	outline: 0;
+	-webkit-overflow-scrolling: touch;
 }
 
 #content {
-  position: relative;
+	position: relative;
 }
 
 #header {
-  position: fixed;
-  bottom: 0;
-  height: 20px;
-  left: 0;
-  right: 0;
-  padding: 0 10px;
-  z-index: 10;
-  background:rgba(0,0,0,.3);
-  border-radius: 3px;
+	position: fixed;
+	bottom: 0;
+	height: 20px;
+	left: 0;
+	right: 0;
+	padding: 0 10px;
+	z-index: 10;
+	background: rgba(0, 0, 0, .3);
+	border-radius: 3px;
 }
 
 a:after {
-  content: '';
-  margin: 0 5px;
-  border-right-width: 1px;
-  border-right-style: solid;
-  border-color: inherit;
+	content: '';
+	margin: 0 5px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-color: inherit;
 }
 
 a:last-of-type:after {
-  border: none;
+	border: none;
 }
 
 .md {
-  font-family: -apple-system, Segoe UI, Helvetica, Arial
+	font-family: -apple-system, Segoe UI, Helvetica, Arial
 }
 
 .md li {
-  margin: 5px 0;
+	margin: 5px 0;
 }
 
-.md h1, .md h2, .md h3, .md h4, .md h5, .md h6{
-  margin: 20px 0 10px;
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6 {
+	margin: 20px 0 10px;
 }
 
 .md ul, .md p {
-  margin: 10px 0;
+	margin: 10px 0;
 }
 
 .md h1, .md h2 {
-  border-bottom: 1px solid #eaecef;
-  padding-bottom: .2em;
+	border-bottom: 1px solid #eaecef;
+	padding-bottom: .2em;
 }
 
 #work-text {
-  z-index: 2;
-  transform: '$workTxtTrans';
+	z-index: 2;
+	transform: '$workTxtTrans';
 }
 
-#intro-text{
-  width:100%;
-  transform: translateX(0);
+#intro-text {
+	width: 100%;
+	transform: translateX(0);
 }
 
-.img-tedy{
-  width:138px;
-  height: 136px;
-  display: inline-block;
-  background: url(../img/tedy.png);
-}
-  
-#work-text header{
-  width: 180px;
-  height: 54px;
-  background: url(../img/logo.png)  no-repeat;
-  background-size: contain;
-  position: relative;
-  overflow: hidden;
-  text-indent: -99999px;
-  margin-bottom:12px;
+.img-tedy {
+	width: 138px;
+	height: 136px;
+	display: inline-block;
+	background: url(../img/tedy.png);
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+#work-text header {
+	width: 180px;
+	height: 54px;
+	background: url(../img/logo.png) no-repeat;
+	background-size: contain;
+	position: relative;
+	overflow: hidden;
+	text-indent: -99999px;
+	margin-bottom: 12px;
 }
 
-#work-text .badge{
+#work-text .badge {
 	width: 100%;
 	max-width: 990px;
-	height:0;
+	height: 0;
 	padding: 10%;
 	background: url(../img/badge.png) no-repeat;
 	background-size: 100% auto;
-  }
-  
-.fade-in{
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.fade-in {
 	animation: fadeIn .5s ease;
 }
 
-.terminal-user{
-	color:rgb(91,104,117);
+.terminal-user {
+	color: rgb(91, 104, 117);
 }
 
-
+/* table */
 
 .markdown-body table {
-    display: block;
-    overflow: auto;
+	display: block;
+	overflow: auto;
 	width: 100%;
 	border-collapse: collapse;
 }
 
 .markdown-body table th {
-    font-weight: 600
+	font-weight: 600
 }
 
-.markdown-body table td,.markdown-body table th {
-    border: 1px solid #dfe2e5;
-    padding: 6px 13px
+.markdown-body table td, .markdown-body table th {
+	border: 1px solid #dfe2e5;
+	padding: 6px 13px
 }
 
 .markdown-body table tr {
-    background-color: #fff;
-    border-top: 1px solid #c6cbd1
+	background-color: #fff;
+	border-top: 1px solid #c6cbd1
 }
 
 .markdown-body table tr:nth-child(2n) {
-    background-color: #f6f8fa
+	background-color: #f6f8fa
 }
 
 .markdown-body table img {
-    background-color: transparent
+	background-color: transparent
 }
