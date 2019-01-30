@@ -90,7 +90,7 @@ html {
  */
 
 #work-text {
-  '$workTxtPos';
+  '$workTxtPos'
   background: rgb(255,255,255);
   color: #333;
   max-height: '$maxH';

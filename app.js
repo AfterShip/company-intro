@@ -61,7 +61,7 @@ async function startAnimation() {
 		await writeTo(introEl, introText[0], 0, speed, false, 1);    // CEO title
 		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
-		await writeTo(introEl, introText[1], 0, speed * 2, 'terminal', 1);    // CEO introduction
+		await writeTo(introEl, introText[1], 0, speed * 1.5, 'terminal', 1);    // CEO introduction
 		await writeTo(styleEl, styleText[5], 0, speed / 2, true, 1); // end
 	}
 	// Flow control straight from the ghettos of Milwaukee
