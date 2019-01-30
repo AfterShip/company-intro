@@ -7,12 +7,12 @@ body {
 }
 
 #work-text.flipped {
-  -webkit-transform: translateX(103%) rotateY(180deg) rotateZ(180deg);
+  -webkit-transform: translateX(100%) rotateY(180deg) rotateZ(180deg);
 }
 
 #work-text .md {
   -webkit-transform: rotateY(180deg) rotateZ(180deg);
-  margin-top: 900px;
+  margin-top: 800px;
 }
 
 /**

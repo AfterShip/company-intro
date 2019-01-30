@@ -10,12 +10,12 @@ import {default as writeChar, writeSimpleChar, handleChar} from './lib/writeChar
 import getPrefix from './lib/getPrefix';
 
 let workText = [0, 1].map(function (i) {return require('raw-loader!./work' + i + '.md');});
-let styleText = [0, 1, 2, 3, 4].map(function (i) {return require('raw-loader!./styles' + i + '.css');});
+let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {return require('raw-loader!./styles' + i + '.css');});
 
 // Vars that will help us get er done
 const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
-let style, styleEl, workEl, skipAnimationEl, pauseEl;
+let style, styleEl, workEl, introEl, skipAnimationEl, pauseEl;
 let animationSkipped = false, done = false, paused = false;
 let browserPrefix;
 
@@ -30,16 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function startAnimation() {
 	try {
-		await writeTo(styleEl, styleText[0], 0, speed*2, true, 1);
-		await writeTo(styleEl, styleText[1], 0, speed/2, true, 1);
-		await writeTo(workEl, workText[0], 0, speed, false, 1);
-		await writeTo(workEl, workText[1], 0, speed, false, 2);
-		await writeTo(styleEl, styleText[2], 0, speed/2, true, 1);
-		createWorkBox();
+		await writeTo(styleEl, styleText[0], 0, speed*2, true, 1); // introduction
+		await writeTo(styleEl, styleText[1], 0, speed/2, true, 1); // initial styling
+		await writeTo(workEl, workText[0], 0, speed, false, 2);    // md of company introduction
+		await writeTo(styleEl, styleText[2], 0, speed/2, true, 1); // prepare to convert md
+		createWorkBox();	// convert md
 		await Promise.delay(1000);
 
-		await writeTo(styleEl, styleText[3], 0, speed/2, true, 1);
-		await writeTo(styleEl, styleText[4], 0, speed/2, true, 1);
+		await writeTo(styleEl, styleText[3], 0, speed/2, true, 1); // md styling, prepare to show CEO introduction
+		await writeTo(introEl, workText[1], 0, speed*2, false, 1);    // CEO introduction
+		await writeTo(styleEl, styleText[4], 0, speed/2, true, 1); // nothing
+		await writeTo(styleEl, styleText[5], 0, speed/2, true, 1); // end
 	}
 	// Flow control straight from the ghettos of Milwaukee
 	catch (e) {
@@ -149,6 +150,7 @@ function getEls() {
 	style = document.getElementById('style-tag');
 	styleEl = document.getElementById('style-text');
 	workEl = document.getElementById('work-text');
+	introEl = document.getElementById('intro-text');
 	skipAnimationEl = document.getElementById('skip-animation');
 	pauseEl = document.getElementById('pause-resume');
 }

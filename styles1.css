@@ -1,13 +1,3 @@
-/**
- * 大家好，我是 Teddy，AfterShip 的 CEO，软件开发出身。
- *
- * 我们希望通过这份公司简历，来展示一下我们的工程师文化。
- *
- * 首先我们来看一下怎么把这个界面变得更好看。
- *
- *
- * 先给所有元素加上过渡效果
- */
 
 * {
   transition: all 1s;
@@ -49,13 +39,12 @@ pre, a {
  }
 
 pre {
-  width:47%;
+  width:50%;
   background: #252f33;
   transform: translateX(95%);
   font-family: monospace;
   white-space: pre-wrap;
   outline: 0;
-	margin: 12px;
 	border-radius: 6px;
 }
 
@@ -79,7 +68,7 @@ pre {
  */
  
 #style-text {
-  max-height: 94.5%;
+  max-height: 61.5%;
   transform: translateX(0);
 }
 
@@ -95,9 +84,9 @@ html {
 
 #work-text {
   position: absolute;
-  transform: translateX(103%);
+  transform: translateX(100%);
   background: rgb(255,255,255);
   color: #333;
-  max-height: 94.5%;
+  max-height: 61.5%;
 }
 

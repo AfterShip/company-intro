@@ -16,7 +16,7 @@ pre {
 
 #content {
   position: absolute;
-  top: 0; right: 0; left: 0; bottom: 20px;
+	top: 12px; right: 12px; left: 12px; bottom: 20px;
 }
 
 #header {

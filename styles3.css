@@ -25,3 +25,18 @@
 .md h1, .md h2, .md h3, .md h4, .md h5, .md h6, .md ul, .md p {
   margin: 0px;
 }
+
+
+/**
+ * 这样 markdown 好看点了
+ *
+ * 现在让我来个自我介绍吧 
+ */
+
+#intro-text {
+  transform: translateX(0);
+  width:100%;
+  color: #333;
+  background: #fff;
+
+}
