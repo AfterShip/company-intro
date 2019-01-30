@@ -1,18 +1,14 @@
 import 'classlist-polyfill';
 import Promise from 'bluebird';
-import Markdown from 'markdown';
-const md = Markdown.markdown.toHTML;
+
+import {default as writeChar, writeSimpleChar, handleChar} from './lib/writeChar';
+
+import styleValues from './lib/getStyle';
+
+// template
 import headerHTML from 'raw-loader!./header.html';
-
-import tedyImg from 'url-loader!./img/tedy.png';
-
-
 import preStyles from 'raw-loader!./prestyles.css';
 import replaceURLs from './lib/replaceURLs';
-import {default as writeChar, writeSimpleChar, handleChar} from './lib/writeChar';
-import getPrefix from './lib/getPrefix';
-
-const styleValues = require('./lib/getStyle')();
 
 let workText = [0, 1].map(function (i) {return require('raw-loader!./work' + i + '.md');});
 
@@ -28,15 +24,22 @@ let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {
 
 });
 
+import getPrefix from './lib/getPrefix';
+import isMoblie from './lib/isMobile';
+import getMd from './lib/getMd';
+
+import {introImgs} from './lib/imgs';
+
 // Vars that will help us get er done
 const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
+const PAGE_PADDING = 12;
 let style, styleEl, workEl, introEl, skipAnimationEl, pauseEl;
 let animationSkipped = false, done = false, paused = false;
 let browserPrefix;
-
 // Wait for load to get started.
 document.addEventListener("DOMContentLoaded", function () {
+	preSetStyle();
 	getBrowserPrefix();
 	populateHeader();
 	getEls();
@@ -73,7 +76,6 @@ async function startAnimation() {
 async function surprisinglyShortAttentionSpan() {
 	if (done) return;
 	done = true;
-	introEl.innerHTML = workText[1];
 	let txt = styleText.join('\n');
 
 	// The work-text animations are rough
@@ -85,6 +87,7 @@ async function surprisinglyShortAttentionSpan() {
 	}
 	styleEl.innerHTML = styleHTML;
 	createWorkBox();
+	createIntroBox()
 
 	// There's a bit of a scroll problem with this thing
 	let start = Date.now();
@@ -143,6 +146,12 @@ async function fastWriteStyle(el, message){
 	writeChar(el, message, style);
 }
 
+
+function preSetStyle(){
+	const h = document.documentElement.clientHeight;
+	document.getElementById('content').style.height = (h - PAGE_PADDING * 2) + 'px';
+}
+
 //
 // Older versions of major browsers (like Android) still use prefixes. So we figure out what that prefix is
 // and use it.
@@ -199,10 +208,10 @@ function createEventHandlers() {
 	pauseEl.addEventListener('click', function (e) {
 		e.preventDefault();
 		if (paused) {
-			pauseEl.textContent = "Pause ||";
+			pauseEl.textContent = "暂停 ||";
 			paused = false;
 		} else {
-			pauseEl.textContent = "Resume >>";
+			pauseEl.textContent = "继续 >>";
 			paused = true;
 		}
 	});
@@ -211,7 +220,7 @@ function createEventHandlers() {
 
 function getWorkContentWithMd(txt) {
 	return '<div class="text">' + replaceURLs(txt) + '</div>' +
-		'<div class="md">' + replaceURLs(md(txt)) + '<div>';
+		'<div class="md">' + replaceURLs(getMd(txt)) + '<div>';
 }
 //
 // Fire a listener when scrolling the 'work' box.
@@ -246,5 +255,5 @@ function createWorkBox() {
 }
 
 function createIntroBox(){
-	introEl.innerHTML = 	'<div class="md">' + replaceURLs(workText[1]) + '<div>';
+	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(workText[1], introImgs)) + '<div>';
 }

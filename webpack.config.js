@@ -18,7 +18,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js?$/,
+        test: /\.css?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
 			},
@@ -26,7 +26,8 @@ module.exports = {
 				test: [/\.gif$/, /\.jpe?g$/, /\.png$/],
 				loader: 'url-loader',
 				options: {
-					limit: 1000000,
+					limit: 999999,
+					mimetype: 'image/png'
 				},
 			},
     ]

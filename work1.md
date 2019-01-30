@@ -1,5 +1,5 @@
 
-![AfterShip CEO](tedy) AfterShip 的 CEO -- 陈龙生
+$tedy AfterShip 的 CEO -- 陈龙生
 
 我是 CEO，谈一下 CEO 的事，大多数 CEO 基本上都做三件事：
 
