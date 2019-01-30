@@ -3,12 +3,13 @@
 html, body {
   margin-top: 0;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   font-size: 14px;
 }
 body {
   -webkit-perspective: 1000px;
   perspective: 1000px;
+  padding: 12px '$bodyPaddingLeftRig' 20px;
 }
 
 * {
@@ -26,7 +27,6 @@ pre {
 
 #content {
   position: relative;
-  margin: 12px 12px 20px;
 }
 
 #header {
@@ -43,7 +43,7 @@ pre {
 
 a:after {
   content: '';
-  padding-right: 5px;
+  margin: 0 5px;
   border-right-width: 1px;
   border-right-style: solid;
   border-color: inherit;
