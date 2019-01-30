@@ -1,4 +1,8 @@
 
+/**
+ * 先给所有元素加上过渡效果
+ */
+
 * {
   transition: all 1s;
 }
@@ -12,7 +16,7 @@
  */
 
 html {
-	background: rgb(63, 82, 99);
+  background: rgb(63, 82, 99);
 }
 
 
@@ -32,6 +36,7 @@ pre, a {
  *
  * 我要让它看起来舒服些
  */
+
  pre:not(:empty){
   overflow: auto;
   box-sizing: border-box;
@@ -44,7 +49,7 @@ pre {
   transform: '$preTrans';
   font-family: monospace;
   outline: 0;
-	border-radius: 6px;
+  border-radius: 6px;
 }
 
 
@@ -70,7 +75,6 @@ pre {
   max-height: '$maxH';
   transform: translateX(0);
 }
-
 html {
   background: #252f33;
 }

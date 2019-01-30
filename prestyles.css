@@ -3,11 +3,20 @@
 html, body {
   margin-top: 0;
   height: 100%;
-	overflow: hidden;
-	font-size: 14px;
+  overflow: auto;
+  font-size: 14px;
+}
+body {
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 pre {
+  margin:0;
   overflow: auto;
   max-height: 90%;
   width: 100%;
@@ -15,14 +24,13 @@ pre {
   white-space: pre-wrap;
 }
 
-#content {
-  position: absolute;
-	top: 12px; right: 12px; left: 12px; bottom: 20px;
+#content1 {
+  position: relative;
+  margin: 12px 12px 20px;
 }
 
 #header {
   position: absolute;
-	display: none;
   bottom: 0;
   height: 20px;
   left: 0;
@@ -41,3 +49,38 @@ a:after {
 a:last-of-type:after {
   border: none;
 }
+
+.md {
+  font-family: -apple-system, Segoe UI, Helvetica, Arial
+}
+
+.md li {
+  margin: 5px 0;
+}
+
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6{
+  margin: 20px 0 10px;
+}
+
+.md ul, .md p {
+  margin: 10px 0;
+}
+
+
+.md h1, .md h2 {
+  padding-bottom: 5em;
+}
+
+#work-text {
+  z-index: 2;
+}
+
+#intro-text{
+  color: #333;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  width:100%;
+  margin-top: 12px
+}
+
+  
