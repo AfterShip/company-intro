@@ -73,8 +73,9 @@ async function startAnimation() {
 		createWorkBox();	// convert md
 		await Promise.delay(1000);
 
+		await scrollToMdBottom(workEl); // scroll to the badge
 		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // continue to add work text
-		await addHtmlToMd(workEl, whyJoinUsHTML); // add more text
+		await addMoreWorkIntro(workEl, whyJoinUsHTML); // add more text
 		await writeTo(styleEl, styleText[6], 0, speed / 2, true, 1); // md styling, prepare to show CEO introduction
 		await writeTo(introEl, introText[0], 0, speed, false, 1); // CEO title
 		createIntroBox(); // convert md
@@ -105,9 +106,13 @@ async function surprisinglyShortAttentionSpan() {
 		styleHTML = handleChar(styleHTML, txt[i]);
 	}
 	styleEl.innerHTML = styleHTML;
+
 	createWorkBox();
+
 	createIntroBox();
 	introEl.innerHTML += introText[1];
+
+	addHtmlToMd(workEl, whyJoinUsHTML);
 
 	// There's a bit of a scroll problem with this thing
 	const start = Date.now();
@@ -168,18 +173,27 @@ async function fastWrite(el, message) {
 	el.innerHTML += message;
 }
 
-
-async function addHtmlToMd(el, html) {
-	const mdWrapper = el.querySelector('.text');
+async function addMoreWorkIntro(el, html) {
 	const htmlWrapper = el.querySelector('.md');
-	const hMd = mdWrapper.offsetHeight;
+	addHtmlToFlippyElement(htmlWrapper, html, el);
+}
+
+async function scrollToMdBottom(el, timing = 300) {
 	const gap = 800;
+	const mdWrapper = el.querySelector('.text');
+	const hMd = mdWrapper.offsetHeight;
 
 	// scroll
-	await runScroll(el, 'cur', hMd + gap, 300);
+	await runScroll(el, 'cur', hMd + gap, timing);
 	await Promise.delay(300);
-	// should more content
-	htmlWrapper.innerHTML += html.replace(/\n/g, '').replace(/\s\s+/g, '');
+}
+async function addHtmlToFlippyElement(el, html, scrollParent) {
+	const originalH = el.offsetHeight;
+	el.innerHTML += html.replace(/\n/g, '').replace(/(\s\s|\t)+/g, '');
+	// jump to original view position
+	scrollParent.scrollTop += el.offsetHeight - originalH;
+	// animate scroll
+	await scrollToMdBottom(scrollParent, 500);
 }
 
 
