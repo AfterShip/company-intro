@@ -24,6 +24,8 @@ import getMd from './lib/getMd';
 
 import {workImgs, introImgs} from './lib/imgs';
 
+import easterEgg from './lib/easterEgg';
+
 const workText = [0].map(function (i) {
 	return require('./work' + i + '.md');
 });
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	getEls();
 	createEventHandlers();
 	startAnimation();
+	easterEgg();
 });
 
 async function startAnimation() {
