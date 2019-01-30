@@ -11,12 +11,11 @@
 /**
  * 这好像没有什么变化
  *
- * 白底黑字有点无聊啊
- * 让我们加点样式
+ * 白底黑字有点无聊啊, 让我们加点样式
  */
 
 html {
-  background: rgb(63, 82, 99);
+  background: #252f33;
 }
 
 
@@ -37,15 +36,19 @@ pre, a {
  * 我要让它看起来舒服些
  */
 
- pre:not(:empty){
-  overflow: auto;
-  box-sizing: border-box;
+#content{
+  margin-top:29px;
+}
+
+pre:not(:empty){
   padding: 10px 20px 20px;
- }
+}
 
 pre {
+  overflow: auto;
   width:'$preWidth';
-  background: #252f33;
+  background: #1b2123;
+  font-size: 15px;
   transform: '$preTrans';
   font-family: monospace;
   outline: 0;
@@ -74,10 +77,12 @@ pre {
 #style-text {
   max-height: '$maxH';
   transform: translateX(0);
+  width: '$styleTxtW';
 }
 html {
-  background: #252f33;
+  background: #0c0f14;
 }
+  
 
 
 /**

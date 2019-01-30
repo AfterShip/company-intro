@@ -24,7 +24,7 @@ pre {
   white-space: pre-wrap;
 }
 
-#content1 {
+#content {
   position: relative;
   margin: 12px 12px 20px;
 }
@@ -67,10 +67,6 @@ a:last-of-type:after {
 }
 
 
-.md h1, .md h2 {
-  padding-bottom: 5em;
-}
-
 #work-text {
   z-index: 2;
 }
@@ -80,7 +76,13 @@ a:last-of-type:after {
   -webkit-transform: translateX(0);
   transform: translateX(0);
   width:100%;
-  margin-top: 12px
+  margin-top: 29px
 }
 
+.img-tedy{
+	width:138px;
+	height: 136px;
+	display: inline-block;
+	background: url(../img/tedy.png)
+}
   

@@ -3,11 +3,11 @@
  */
 
 #work-text.flipped {
-  -webkit-transform: '$workTxtTrans' rotateY(180deg) rotateZ(180deg);
+  transform: '$workTxtTrans' rotateY(180deg) rotateZ(180deg);
 }
 
 #work-text .md {
-  -webkit-transform: rotateY(180deg) rotateZ(180deg);
+  transform: rotateY(180deg) rotateZ(180deg);
   margin-top: 800px;
 }
 
