@@ -91,8 +91,7 @@ html {
  */
 
 #work-text {
-  position: absolute;
-  transform: '$workTxtTrans';
+  '$workTxtPos';
   background: rgb(255,255,255);
   color: #333;
   max-height: '$maxH';

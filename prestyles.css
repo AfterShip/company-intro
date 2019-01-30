@@ -30,12 +30,15 @@ pre {
 }
 
 #header {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 20px;
   left: 0;
   right: 0;
   padding: 0 10px;
+  z-index: 10;
+  background:rgba(0,0,0,.3);
+  border-radius: 3px;
 }
 
 a:after {
@@ -69,14 +72,13 @@ a:last-of-type:after {
 
 #work-text {
   z-index: 2;
+  transform: '$workTxtTrans';
 }
 
 #intro-text{
-  color: #333;
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
   width:100%;
-  margin-top: 29px
+  transform: translateX(0);
+  margin-top: '$introMarginTop';
 }
 
 .img-tedy{

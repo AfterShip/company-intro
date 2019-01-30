@@ -1,0 +1,18 @@
+
+/**
+ * 这样 markdown 好看点了
+ *
+ * 现在让我来个自我介绍吧 
+ */
+
+ '$blockMob'
+
+ #intro-text {
+  color: #333;
+  background: #444f5c;
+  height: '$introH';
+}
+#intro-text .md{
+  color: #fff;
+}
+

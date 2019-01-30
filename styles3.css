@@ -11,18 +11,3 @@
   border-bottom: 1px solid #eaecef;
   padding-bottom: .25em;
 }
-
-.md h3, .md h4, .md h5, .md h6 {
-  padding-bottom: .05em;
-}
-
-
-/**
- * 这样 markdown 好看点了
- *
- * 现在让我来个自我介绍吧 
- */
-
-#intro-text {
-  background: #fff;
-}

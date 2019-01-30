@@ -3,25 +3,17 @@ import Promise from 'bluebird';
 
 import {default as writeChar, writeSimpleChar, handleChar} from './lib/writeChar';
 
-import styleValues from './lib/getStyle';
-
 // template
 import headerHTML from 'raw-loader!./header.html';
 import preStyles from 'raw-loader!./prestyles.css';
 import replaceURLs from './lib/replaceURLs';
+import insetStyleVariable from './lib/insetStyleVariable';
 
 let workText = [0, 1].map(function (i) {return require('raw-loader!./work' + i + '.md');});
 
-const matchStyleVariable = /\'\$(\w+)\'/g;
 let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {
 	const txt = require('raw-loader!./styles' + i + '.css');
-	return txt.replace(matchStyleVariable, function(match, name){
-		if(styleValues[name]){
-			return styleValues[name];
-		}
-		return match;
-	});
-
+	return insetStyleVariable(txt);
 });
 
 import getPrefix from './lib/getPrefix';
@@ -31,7 +23,7 @@ import getMd from './lib/getMd';
 import {introImgs} from './lib/imgs';
 
 // Vars that will help us get er done
-const isDev = window.location.hostname === 'localhost';
+const isDev = 0;window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 const PAGE_PADDING = 12;
 let style, styleEl, workEl, introEl, skipAnimationEl, pauseEl;
@@ -170,7 +162,7 @@ function getBrowserPrefix() {
 function getEls() {
 	// We're cheating a bit on styles.
 	let preStyleEl = document.createElement('style');
-	preStyleEl.textContent = preStyles;
+	preStyleEl.textContent = insetStyleVariable(preStyles);
 	document.head.insertBefore(preStyleEl, document.getElementsByTagName('style')[0]);
 
 	// El refs
