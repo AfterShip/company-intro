@@ -23,6 +23,7 @@ pre {
   width: 100%;
   border-radius: 3px; /* Prevents bad clipping in Chrome */
   white-space: pre-wrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 #content {
@@ -117,9 +118,40 @@ a:last-of-type:after {
   }
   
 .fade-in{
-	animation: fadeIn .3s ease;
+	animation: fadeIn .5s ease;
 }
 
 .terminal-user{
 	color:rgb(91,104,117);
+}
+
+
+
+.markdown-body table {
+    display: block;
+    overflow: auto;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.markdown-body table th {
+    font-weight: 600
+}
+
+.markdown-body table td,.markdown-body table th {
+    border: 1px solid #dfe2e5;
+    padding: 6px 13px
+}
+
+.markdown-body table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1
+}
+
+.markdown-body table tr:nth-child(2n) {
+    background-color: #f6f8fa
+}
+
+.markdown-body table img {
+    background-color: transparent
 }
