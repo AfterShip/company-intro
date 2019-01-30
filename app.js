@@ -9,6 +9,7 @@ import whyJoinUsHTML from 'raw-loader!./whyJoinUs.html';
 import preStyles from 'raw-loader!./prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import insetStyleVariable from './lib/insetStyleVariable';
+import {runScroll} from './lib/animate';
 
 let workText = [0].map(function (i) {return require('raw-loader!./work' + i + '.md');});
 let introText = [0, 1].map(function (i) {return require('raw-loader!./intro' + i + '.md');});
@@ -16,13 +17,13 @@ let introText = [0, 1].map(function (i) {return require('raw-loader!./intro' + i
 // image element
 const aftershipTitle = '<header>AfterShip</header>';
 
-let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {
+let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
 	const txt = require('raw-loader!./styles' + i + '.css');
 	return insetStyleVariable(txt);
 });
 
 import getPrefix from './lib/getPrefix';
-import isMoblie from './lib/isMobile';
+// import isMoblie from './lib/isMobile';
 import getMd from './lib/getMd';
 
 import {workImgs, introImgs} from './lib/imgs';
@@ -48,13 +49,15 @@ async function startAnimation() {
 	try {
 		await writeTo(styleEl, styleText[0], 0, speed * 1.5, true, 1); // introduction
 		await writeTo(styleEl, styleText[1], 0, speed / 2, true, 1); // initial styling
-		await fastWriteStyle(workEl, aftershipTitle);    // md of company introduction
+		await fastWrite(workEl, aftershipTitle);    // md of company introduction
 		await writeTo(workEl, workText[0], 0, speed, false, 2);    // md of company introduction
 		await writeTo(styleEl, styleText[2], 0, speed / 2, true, 1); // prepare to convert md
 		createWorkBox();	// convert md
 		await Promise.delay(1000);
 
-		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // md styling, prepare to show CEO introduction
+		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // continue to add work text
+		await addHtmlToMd(workEl, whyJoinUsHTML);    // add more text
+		await writeTo(styleEl, styleText[6], 0, speed / 2, true, 1); // md styling, prepare to show CEO introduction
 		await writeTo(introEl, introText[0], 0, speed, false, 1);    // CEO title
 		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
@@ -141,8 +144,23 @@ async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInte
 	}
 }
 
-async function fastWriteStyle(el, message){
-	writeChar(el, message, style);
+async function fastWrite(el, message){
+	el.innerHTML += message;
+}
+
+
+
+async function addHtmlToMd(el, html){
+	const mdWrapper = el.querySelector('.text');
+	const htmlWrapper = el.querySelector('.md');
+	const hMd = mdWrapper.offsetHeight;
+	const gap = 800;
+
+	// scroll
+	await runScroll(el, 'cur', hMd + gap, 300);
+	await Promise.delay(300);
+	// should more content
+	htmlWrapper.innerHTML += html.replace(/\n/g, '').replace(/\s\s+/g, '');
 }
 
 
@@ -255,5 +273,5 @@ function createWorkBox() {
 }
 
 function createIntroBox(){
-	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(introText.join('\n'), introImgs)) + '<div>';
+	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(introText[0], introImgs)) + '<div>';
 }

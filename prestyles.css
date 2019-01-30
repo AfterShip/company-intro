@@ -70,7 +70,7 @@ a:last-of-type:after {
 }
 
 .md h1, .md h2 {
-  border-bottom: 1px solid #eaecef
+  border-bottom: 1px solid #eaecef;
   padding-bottom: .2em;
 }
 
@@ -102,6 +102,11 @@ a:last-of-type:after {
   margin-bottom:12px;
 }
 
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 #work-text .badge{
 	width: 100%;
 	max-width: 990px;
@@ -111,3 +116,6 @@ a:last-of-type:after {
 	background-size: 100% auto;
   }
   
+.fade-in{
+	animation: fadeIn .3s ease;
+}
