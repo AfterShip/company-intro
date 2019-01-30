@@ -1,0 +1,27 @@
+
+/**
+ * 文字可以做一些调整
+ */
+
+.md {
+  color: #24292e;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
+
+.md h1, .md h2 {
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: .3em;
+}
+
+.md h3, .md h4, .md h5, .md h6 {
+  display: inline-block;
+  padding-bottom: .15em;
+}
+
+.md li {
+  margin: 5px 0;
+}
+
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6, .md ul, .md p {
+  margin: 0px;
+}

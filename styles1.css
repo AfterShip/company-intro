@@ -1,0 +1,103 @@
+/**
+ * 大家好，我是 Teddy，AfterShip 的 CEO，软件开发出身。
+ *
+ * 我们希望通过这份公司简历，来展示一下我们的工程师文化。
+ *
+ * 首先我们来看一下怎么把这个界面变得更好看。
+ *
+ *
+ * 先给所有元素加上过渡效果
+ */
+
+* {
+  transition: all 1s;
+}
+
+
+/**
+ * 这好像没有什么变化
+ *
+ * 白底黑字有点无聊啊
+ * 让我们加点样式
+ */
+
+html {
+	background: rgb(63, 82, 99);
+}
+
+
+/***
+ * 等等...
+ */
+
+pre, a {
+  color: white;
+}
+
+
+/**
+ * 这样好一点了
+ *
+ * 但是这个编辑区有点宽了
+ *
+ * 我要让它看起来舒服些
+ */
+ pre:not(:empty){
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 10px 20px 20px;
+ }
+
+pre {
+  width:47%;
+  background: #252f33;
+  transform: translateX(95%);
+  font-family: monospace;
+  white-space: pre-wrap;
+  outline: 0;
+	margin: 12px;
+	border-radius: 6px;
+}
+
+
+/**
+ * 这样好点了. 但是所有代码都是白色的啊~
+ * 让我们把它们更好阅读吧
+ */
+
+.comment       { color: #6a9955; font-style: italic; }
+.selector      { color: #d7ba7d; }
+.selector .key { color: #9cdcfe; }
+.key           { color: #9cdcfe; }
+.value         { color: #ce9178; }
+.value.px      { color: #ce9178; }
+
+
+/**
+ * 现在应该比较适合观看了, 我们要准备加入一些内容了
+ * 让我们先做一些准备工作
+ */
+ 
+#style-text {
+  max-height: 94.5%;
+  transform: translateX(0);
+}
+
+html {
+  background: #252f33;
+}
+
+
+/**
+ * 好了, 让我们一起谈一谈项目吧, 这才是你在这里的原因, 对吧?
+ * 你来这里不可能只是为了看看这些漂亮的颜色吧?
+ */
+
+#work-text {
+  position: absolute;
+  transform: translateX(103%);
+  background: rgb(255,255,255);
+  color: #333;
+  max-height: 94.5%;
+}
+
