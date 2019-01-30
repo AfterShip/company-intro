@@ -5,11 +5,16 @@ import {default as writeChar, writeSimpleChar, handleChar} from './lib/writeChar
 
 // template
 import headerHTML from 'raw-loader!./header.html';
+import whyJoinUsHTML from 'raw-loader!./whyJoinUs.html';
 import preStyles from 'raw-loader!./prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import insetStyleVariable from './lib/insetStyleVariable';
 
-let workText = [0, 1, 2].map(function (i) {return require('raw-loader!./work' + i + '.md');});
+let workText = [0].map(function (i) {return require('raw-loader!./work' + i + '.md');});
+let introText = [0, 1].map(function (i) {return require('raw-loader!./intro' + i + '.md');});
+
+// image element
+const aftershipTitle = '<header>AfterShip</header>';
 
 let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {
 	const txt = require('raw-loader!./styles' + i + '.css');
@@ -20,10 +25,10 @@ import getPrefix from './lib/getPrefix';
 import isMoblie from './lib/isMobile';
 import getMd from './lib/getMd';
 
-import {introImgs} from './lib/imgs';
+import {workImgs, introImgs} from './lib/imgs';
 
 // Vars that will help us get er done
-const isDev = 0;window.location.hostname === 'localhost';
+const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 const PAGE_PADDING = 12;
 let style, styleEl, workEl, introEl, skipAnimationEl, pauseEl;
@@ -43,16 +48,17 @@ async function startAnimation() {
 	try {
 		await writeTo(styleEl, styleText[0], 0, speed * 1.5, true, 1); // introduction
 		await writeTo(styleEl, styleText[1], 0, speed / 2, true, 1); // initial styling
+		await fastWriteStyle(workEl, aftershipTitle);    // md of company introduction
 		await writeTo(workEl, workText[0], 0, speed, false, 2);    // md of company introduction
 		await writeTo(styleEl, styleText[2], 0, speed / 2, true, 1); // prepare to convert md
 		createWorkBox();	// convert md
 		await Promise.delay(1000);
 
 		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // md styling, prepare to show CEO introduction
-		await writeTo(introEl, workText[1], 0, speed, false, 1);    // CEO title
+		await writeTo(introEl, introText[0], 0, speed, false, 1);    // CEO title
 		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
-		await writeTo(introEl, workText[2], 0, speed * 2, false, 1);    // CEO introduction
+		await writeTo(introEl, introText[1], 0, speed * 2, false, 1);    // CEO introduction
 		await writeTo(styleEl, styleText[5], 0, speed / 2, true, 1); // end
 	}
 	// Flow control straight from the ghettos of Milwaukee
@@ -211,16 +217,17 @@ function createEventHandlers() {
 }
 
 
-function getWorkContentWithMd(txt) {
+function getWorkContentWithMd() {
+	const txt = workText[0];
 	return '<div class="text">' + replaceURLs(txt) + '</div>' +
-		'<div class="md">' + replaceURLs(getMd(txt)) + '<div>';
+		'<div class="md">' + aftershipTitle + replaceURLs(getMd(txt, workImgs)) + '<div>';
 }
 //
 // Fire a listener when scrolling the 'work' box.
 //
 function createWorkBox() {
 	if (workEl.classList.contains('flipped')) return;
-	workEl.innerHTML = getWorkContentWithMd(workText[0]);
+	workEl.innerHTML = getWorkContentWithMd();
 	workEl.scrollTop = 9999;
 	workEl.classList.add('flipped');
 
@@ -248,5 +255,5 @@ function createWorkBox() {
 }
 
 function createIntroBox(){
-	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(workText[1], introImgs)) + '<div>';
+	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(introText.join('\n'), introImgs)) + '<div>';
 }

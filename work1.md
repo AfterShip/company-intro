@@ -1,2 +1,2 @@
 
-$tedy AfterShip 的 CEO -- 陈龙生
+## 为什么加入我们

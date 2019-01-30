@@ -70,7 +70,8 @@ a:last-of-type:after {
 }
 
 .md h1, .md h2 {
-  border-bottom: 1px solid #eaecef;
+  border-bottom: 1px solid #eaecef
+  padding-bottom: .2em;
 }
 
 #work-text {
@@ -84,9 +85,29 @@ a:last-of-type:after {
 }
 
 .img-tedy{
-	width:138px;
-	height: 136px;
-	display: inline-block;
-	background: url(../img/tedy.png)
+  width:138px;
+  height: 136px;
+  display: inline-block;
+  background: url(../img/tedy.png);
 }
+  
+#work-text header{
+  width: 180px;
+  height: 54px;
+  background: url(../img/logo.png)  no-repeat;
+  background-size: contain;
+  position: relative;
+  overflow: hidden;
+  text-indent: -99999px;
+  margin-bottom:12px;
+}
+
+#work-text .badge{
+	width: 100%;
+	max-width: 990px;
+	height:0;
+	padding: 10%;
+	background: url(../img/badge.png) no-repeat;
+	background-size: 100% auto;
+  }
   
