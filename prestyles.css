@@ -119,3 +119,7 @@ a:last-of-type:after {
 .fade-in{
 	animation: fadeIn .3s ease;
 }
+
+.terminal-user{
+	color:rgb(91,104,117);
+}

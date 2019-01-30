@@ -3,8 +3,7 @@
 
  #intro-text {
   margin-top: '$introMarginTop';
-  color: #333;
-  background: #444f5c;
+  background: rgb(34,43,52);
   height: '$introH';
   color: #fff;
 }

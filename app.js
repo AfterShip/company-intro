@@ -1,7 +1,7 @@
 import 'classlist-polyfill';
 import Promise from 'bluebird';
 
-import {default as writeChar, writeSimpleChar, handleChar} from './lib/writeChar';
+import {default as writeChar, writeSimpleChar, handleChar, writeTerminal} from './lib/writeChar';
 
 // template
 import headerHTML from 'raw-loader!./header.html';
@@ -61,7 +61,7 @@ async function startAnimation() {
 		await writeTo(introEl, introText[0], 0, speed, false, 1);    // CEO title
 		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
-		await writeTo(introEl, introText[1], 0, speed * 2, false, 1);    // CEO introduction
+		await writeTo(introEl, introText[1], 0, speed * 2, 'terminal', 1);    // CEO introduction
 		await writeTo(styleEl, styleText[5], 0, speed / 2, true, 1); // end
 	}
 	// Flow control straight from the ghettos of Milwaukee
@@ -89,7 +89,8 @@ async function surprisinglyShortAttentionSpan() {
 	}
 	styleEl.innerHTML = styleHTML;
 	createWorkBox();
-	createIntroBox()
+	createIntroBox();
+	introEl.innerHTML += introText[1];
 
 	// There's a bit of a scroll problem with this thing
 	let start = Date.now();
@@ -122,7 +123,9 @@ async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInte
 	el.scrollTop = el.scrollHeight;
 
 	// If this is going to <style> it's more complex; otherwise, just write.
-	if (mirrorToStyle) {
+	if(mirrorToStyle ==='terminal'){
+		writeTerminal(el, chars);
+	} else if (mirrorToStyle) {
 		writeChar(el, chars, style);
 	} else {
 		writeSimpleChar(el, chars);
