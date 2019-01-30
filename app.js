@@ -1,26 +1,22 @@
+/* eslint max-params: "off" */
+/* eslint consistent-return: "off" */
+/* eslint no-param-reassign: "off" */
+
 import 'classlist-polyfill';
+// eslint-disable-next-line
 import Promise from 'bluebird';
 
-import {default as writeChar, writeSimpleChar, handleChar, writeTerminal} from './lib/writeChar';
+import writeChar, {
+	writeSimpleChar, handleChar, writeTerminal,
+} from './lib/writeChar';
 
 // template
-import headerHTML from 'raw-loader!./header.html';
-import whyJoinUsHTML from 'raw-loader!./whyJoinUs.html';
-import preStyles from 'raw-loader!./prestyles.css';
+import headerHTML from './header.html';
+import whyJoinUsHTML from './whyJoinUs.html';
+import preStyles from './prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import insetStyleVariable from './lib/insetStyleVariable';
 import {runScroll} from './lib/animate';
-
-let workText = [0].map(function (i) {return require('raw-loader!./work' + i + '.md');});
-let introText = [0, 1].map(function (i) {return require('raw-loader!./intro' + i + '.md');});
-
-// image element
-const aftershipTitle = '<header>AfterShip</header>';
-
-let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
-	const txt = require('raw-loader!./styles' + i + '.css');
-	return insetStyleVariable(txt);
-});
 
 import getPrefix from './lib/getPrefix';
 // import isMoblie from './lib/isMobile';
@@ -28,15 +24,37 @@ import getMd from './lib/getMd';
 
 import {workImgs, introImgs} from './lib/imgs';
 
+const workText = [0].map(function (i) {
+	return require('./work' + i + '.md');
+});
+const introText = [0, 1].map(function (i) {
+	return require('./intro' + i + '.md');
+});
+
+// image element
+const aftershipTitle = '<header>AfterShip</header>';
+
+let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
+	const txt = require('./styles' + i + '.css');
+	return insetStyleVariable(txt);
+});
+
 // Vars that will help us get er done
 const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 const PAGE_PADDING = 12;
-let style, styleEl, workEl, introEl, skipAnimationEl, pauseEl;
-let animationSkipped = false, done = false, paused = false;
+let style;
+let styleEl;
+let workEl;
+let introEl;
+let skipAnimationEl;
+let	pauseEl;
+let animationSkipped = false;
+let done = false;
+let	paused = false;
 let browserPrefix;
 // Wait for load to get started.
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
 	preSetStyle();
 	getBrowserPrefix();
 	populateHeader();
@@ -49,24 +67,23 @@ async function startAnimation() {
 	try {
 		await writeTo(styleEl, styleText[0], 0, speed * 1.5, true, 1); // introduction
 		await writeTo(styleEl, styleText[1], 0, speed / 2, true, 1); // initial styling
-		await fastWrite(workEl, aftershipTitle);    // md of company introduction
-		await writeTo(workEl, workText[0], 0, speed, false, 2);    // md of company introduction
+		await fastWrite(workEl, aftershipTitle); // md of company introduction
+		await writeTo(workEl, workText[0], 0, speed, false, 2); // md of company introduction
 		await writeTo(styleEl, styleText[2], 0, speed / 2, true, 1); // prepare to convert md
 		createWorkBox();	// convert md
 		await Promise.delay(1000);
 
 		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // continue to add work text
-		await addHtmlToMd(workEl, whyJoinUsHTML);    // add more text
+		await addHtmlToMd(workEl, whyJoinUsHTML); // add more text
 		await writeTo(styleEl, styleText[6], 0, speed / 2, true, 1); // md styling, prepare to show CEO introduction
-		await writeTo(introEl, introText[0], 0, speed, false, 1);    // CEO title
+		await writeTo(introEl, introText[0], 0, speed, false, 1); // CEO title
 		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
-		await writeTo(introEl, introText[1], 0, speed * 1.5, 'terminal', 1);    // CEO introduction
+		await writeTo(introEl, introText[1], 0, speed * 1.5, 'terminal', 1); // CEO introduction
 		await writeTo(styleEl, styleText[5], 0, speed / 2, true, 1); // end
-	}
-	// Flow control straight from the ghettos of Milwaukee
-	catch (e) {
-		if (e.message === "SKIP IT") {
+	} catch (e) {
+		// Flow control straight from the ghettos of Milwaukee
+		if (e.message === 'SKIP IT') {
 			surprisinglyShortAttentionSpan();
 		} else {
 			throw e;
@@ -78,12 +95,12 @@ async function startAnimation() {
 async function surprisinglyShortAttentionSpan() {
 	if (done) return;
 	done = true;
-	let txt = styleText.join('\n');
+	const txt = styleText.join('\n');
 
 	// The work-text animations are rough
-	style.textContent = "#work-text * { " + browserPrefix + "transition: none; }";
+	style.textContent = '#work-text * { ' + browserPrefix + 'transition: none; }';
 	style.textContent += txt;
-	let styleHTML = "";
+	let styleHTML = '';
 	for (let i = 0; i < txt.length; i++) {
 		styleHTML = handleChar(styleHTML, txt[i]);
 	}
@@ -93,7 +110,7 @@ async function surprisinglyShortAttentionSpan() {
 	introEl.innerHTML += introText[1];
 
 	// There's a bit of a scroll problem with this thing
-	let start = Date.now();
+	const start = Date.now();
 	while (Date.now() - 1000 > start) {
 		workEl.scrollTop = Infinity;
 		styleEl.scrollTop = Infinity;
@@ -106,9 +123,9 @@ async function surprisinglyShortAttentionSpan() {
  * Helpers
  */
 
-let endOfSentence = /[\?\!]\s$/;
-let comma = /\D[\,\。]\s$/;
-let endOfBlock = /[^\/]\n\n$/;
+const endOfSentence = /[?!]\s$/;
+const comma = /\D[,。]\s$/;
+const endOfBlock = /[^/]\n\n$/;
 
 async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInterval) {
 	if (animationSkipped) {
@@ -116,14 +133,14 @@ async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInte
 		throw new Error('SKIP IT');
 	}
 	// Write a character or multiple characters to the buffer.
-	let chars = message.slice(index, index + charsPerInterval);
+	const chars = message.slice(index, index + charsPerInterval);
 	index += charsPerInterval;
 
 	// Ensure we stay scrolled to the bottom.
 	el.scrollTop = el.scrollHeight;
 
 	// If this is going to <style> it's more complex; otherwise, just write.
-	if(mirrorToStyle ==='terminal'){
+	if (mirrorToStyle === 'terminal') {
 		writeTerminal(el, chars);
 	} else if (mirrorToStyle) {
 		writeChar(el, chars, style);
@@ -134,7 +151,7 @@ async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInte
 	// Schedule another write.
 	if (index < message.length) {
 		let thisInterval = interval;
-		let thisSlice = message.slice(index - 2, index + 1);
+		const thisSlice = message.slice(index - 2, index + 1);
 		if (comma.test(thisSlice)) thisInterval = interval * 3;
 		if (endOfBlock.test(thisSlice)) thisInterval = interval * 15;
 		if (endOfSentence.test(thisSlice)) thisInterval = interval * 30;
@@ -147,13 +164,12 @@ async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInte
 	}
 }
 
-async function fastWrite(el, message){
+async function fastWrite(el, message) {
 	el.innerHTML += message;
 }
 
 
-
-async function addHtmlToMd(el, html){
+async function addHtmlToMd(el, html) {
 	const mdWrapper = el.querySelector('.text');
 	const htmlWrapper = el.querySelector('.md');
 	const hMd = mdWrapper.offsetHeight;
@@ -167,7 +183,7 @@ async function addHtmlToMd(el, html){
 }
 
 
-function preSetStyle(){
+function preSetStyle() {
 	const h = document.documentElement.clientHeight;
 	document.getElementById('content').style.height = (h - PAGE_PADDING * 2) + 'px';
 }
@@ -189,7 +205,7 @@ function getBrowserPrefix() {
 //
 function getEls() {
 	// We're cheating a bit on styles.
-	let preStyleEl = document.createElement('style');
+	const preStyleEl = document.createElement('style');
 	preStyleEl.textContent = insetStyleVariable(preStyles);
 	document.head.insertBefore(preStyleEl, document.getElementsByTagName('style')[0]);
 
@@ -206,7 +222,7 @@ function getEls() {
 // Create links in header (now footer).
 //
 function populateHeader() {
-	let header = document.getElementById('header');
+	const header = document.getElementById('header');
 	header.innerHTML = headerHTML;
 }
 
@@ -228,10 +244,10 @@ function createEventHandlers() {
 	pauseEl.addEventListener('click', function (e) {
 		e.preventDefault();
 		if (paused) {
-			pauseEl.textContent = "暂停 ||";
+			pauseEl.textContent = '暂停 ||';
 			paused = false;
 		} else {
-			pauseEl.textContent = "继续 >>";
+			pauseEl.textContent = '继续 >>';
 			paused = true;
 		}
 	});
@@ -239,9 +255,9 @@ function createEventHandlers() {
 
 
 function getWorkContentWithMd() {
-	const txt = workText[0];
-	return '<div class="text">' + replaceURLs(txt) + '</div>' +
-		'<div class="md">' + aftershipTitle + replaceURLs(getMd(txt, workImgs)) + '<div>';
+	const [txt] = workText;
+	return '<div class="text">' + replaceURLs(txt) + '</div>'
+		+ '<div class="md">' + aftershipTitle + replaceURLs(getMd(txt, workImgs)) + '<div>';
 }
 //
 // Fire a listener when scrolling the 'work' box.
@@ -257,9 +273,9 @@ function createWorkBox() {
 	let flipping = 0;
 	require('mouse-wheel')(workEl, async function (dx, dy) {
 		if (flipping) return;
-		let flipped = workEl.classList.contains('flipped');
-		let half = (workEl.scrollHeight - workEl.clientHeight) / 2;
-		let pastHalf = flipped ? workEl.scrollTop < half : workEl.scrollTop > half;
+		const flipped = workEl.classList.contains('flipped');
+		const half = (workEl.scrollHeight - workEl.clientHeight) / 2;
+		const pastHalf = flipped ? workEl.scrollTop < half : workEl.scrollTop > half;
 
 		// If we're past half, flip the el.
 		if (pastHalf) {
@@ -275,6 +291,6 @@ function createWorkBox() {
 	}, true);
 }
 
-function createIntroBox(){
+function createIntroBox() {
 	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(introText[0], introImgs)) + '<div>';
 }
