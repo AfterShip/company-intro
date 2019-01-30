@@ -112,7 +112,7 @@ async function surprisinglyShortAttentionSpan() {
 	createIntroBox();
 	introEl.innerHTML += introText[1];
 
-	addHtmlToMd(workEl, whyJoinUsHTML);
+	await addMoreWorkIntro(workEl, whyJoinUsHTML);
 
 	// There's a bit of a scroll problem with this thing
 	const start = Date.now();
