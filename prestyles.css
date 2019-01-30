@@ -69,6 +69,9 @@ a:last-of-type:after {
   margin: 10px 0;
 }
 
+.md h1, .md h2 {
+  border-bottom: 1px solid #eaecef;
+}
 
 #work-text {
   z-index: 2;
@@ -78,7 +81,6 @@ a:last-of-type:after {
 #intro-text{
   width:100%;
   transform: translateX(0);
-  margin-top: '$introMarginTop';
 }
 
 .img-tedy{

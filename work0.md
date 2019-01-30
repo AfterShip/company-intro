@@ -58,9 +58,8 @@ AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟�
 * 团体沟通: Slack, Gmail, Google Drive, 1Password
 
 
-
 ### 对技术的要求
 
-... TODO: 还有更多信息加入
+
 
 

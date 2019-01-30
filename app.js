@@ -9,7 +9,7 @@ import preStyles from 'raw-loader!./prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import insetStyleVariable from './lib/insetStyleVariable';
 
-let workText = [0, 1].map(function (i) {return require('raw-loader!./work' + i + '.md');});
+let workText = [0, 1, 2].map(function (i) {return require('raw-loader!./work' + i + '.md');});
 
 let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {
 	const txt = require('raw-loader!./styles' + i + '.css');
@@ -41,18 +41,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function startAnimation() {
 	try {
-		await writeTo(styleEl, styleText[0], 0, speed*2, true, 1); // introduction
-		await writeTo(styleEl, styleText[1], 0, speed/2, true, 1); // initial styling
+		await writeTo(styleEl, styleText[0], 0, speed * 1.5, true, 1); // introduction
+		await writeTo(styleEl, styleText[1], 0, speed / 2, true, 1); // initial styling
 		await writeTo(workEl, workText[0], 0, speed, false, 2);    // md of company introduction
-		await writeTo(styleEl, styleText[2], 0, speed/2, true, 1); // prepare to convert md
+		await writeTo(styleEl, styleText[2], 0, speed / 2, true, 1); // prepare to convert md
 		createWorkBox();	// convert md
 		await Promise.delay(1000);
 
-		await writeTo(styleEl, styleText[3], 0, speed/2, true, 1); // md styling, prepare to show CEO introduction
-		await writeTo(introEl, workText[1], 0, speed*2, false, 1);    // CEO introduction
+		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // md styling, prepare to show CEO introduction
+		await writeTo(introEl, workText[1], 0, speed, false, 1);    // CEO title
 		createIntroBox(); // convert md
-		await writeTo(styleEl, styleText[4], 0, speed/2, true, 1); // nothing
-		await writeTo(styleEl, styleText[5], 0, speed/2, true, 1); // end
+		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
+		await writeTo(introEl, workText[2], 0, speed * 2, false, 1);    // CEO introduction
+		await writeTo(styleEl, styleText[5], 0, speed / 2, true, 1); // end
 	}
 	// Flow control straight from the ghettos of Milwaukee
 	catch (e) {
@@ -95,8 +96,8 @@ async function surprisinglyShortAttentionSpan() {
  * Helpers
  */
 
-let endOfSentence = /[\.\?\!]\s$/;
-let comma = /\D[\,]\s$/;
+let endOfSentence = /[\?\!]\s$/;
+let comma = /\D[\,\。]\s$/;
 let endOfBlock = /[^\/]\n\n$/;
 
 async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInterval) {
@@ -122,9 +123,9 @@ async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInte
 	if (index < message.length) {
 		let thisInterval = interval;
 		let thisSlice = message.slice(index - 2, index + 1);
-		if (comma.test(thisSlice)) thisInterval = interval * 30;
-		if (endOfBlock.test(thisSlice)) thisInterval = interval * 50;
-		if (endOfSentence.test(thisSlice)) thisInterval = interval * 70;
+		if (comma.test(thisSlice)) thisInterval = interval * 3;
+		if (endOfBlock.test(thisSlice)) thisInterval = interval * 15;
+		if (endOfSentence.test(thisSlice)) thisInterval = interval * 30;
 
 		do {
 			await Promise.delay(thisInterval);

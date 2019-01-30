@@ -1,13 +1,8 @@
 
 /**
- * 文字可以做一些调整
+ * 这样 markdown 好看点了
+ *
+ * 现在让我来个自我介绍吧 
  */
 
-.md {
-  color: #24292e;
-}
 
-.md h1, .md h2 {
-  border-bottom: 1px solid #eaecef;
-  padding-bottom: .25em;
-}
