@@ -39,11 +39,10 @@ pre, a {
  }
 
 pre {
-  width:50%;
+  width:'$preWidth';
   background: #252f33;
-  transform: translateX(95%);
+  transform: '$preTrans';
   font-family: monospace;
-  white-space: pre-wrap;
   outline: 0;
 	border-radius: 6px;
 }
@@ -68,7 +67,7 @@ pre {
  */
  
 #style-text {
-  max-height: 61.5%;
+  max-height: '$maxH';
   transform: translateX(0);
 }
 
@@ -84,9 +83,9 @@ html {
 
 #work-text {
   position: absolute;
-  transform: translateX(100%);
+  transform: '$workTxtTrans';
   background: rgb(255,255,255);
   color: #333;
-  max-height: 61.5%;
+  max-height: '$maxH';
 }
 

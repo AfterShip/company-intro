@@ -12,6 +12,7 @@ pre {
   max-height: 90%;
   width: 100%;
   border-radius: 3px; /* Prevents bad clipping in Chrome */
+  white-space: pre-wrap;
 }
 
 #content {
@@ -21,6 +22,7 @@ pre {
 
 #header {
   position: absolute;
+	display: none;
   bottom: 0;
   height: 20px;
   left: 0;

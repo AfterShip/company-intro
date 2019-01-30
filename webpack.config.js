@@ -21,7 +21,14 @@ module.exports = {
         test: /\.js?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      }
+			},
+			{
+				test: [/\.gif$/, /\.jpe?g$/, /\.png$/],
+				loader: 'url-loader',
+				options: {
+					limit: 1000000,
+				},
+			},
     ]
   },
   devServer: {

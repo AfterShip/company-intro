@@ -7,7 +7,7 @@ body {
 }
 
 #work-text.flipped {
-  -webkit-transform: translateX(100%) rotateY(180deg) rotateZ(180deg);
+  -webkit-transform: '$workTxtTrans' rotateY(180deg) rotateZ(180deg);
 }
 
 #work-text .md {

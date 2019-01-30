@@ -4,13 +4,29 @@ import Markdown from 'markdown';
 const md = Markdown.markdown.toHTML;
 import headerHTML from 'raw-loader!./header.html';
 
+import tedyImg from 'url-loader!./img/tedy.png';
+
+
 import preStyles from 'raw-loader!./prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import {default as writeChar, writeSimpleChar, handleChar} from './lib/writeChar';
 import getPrefix from './lib/getPrefix';
 
+const styleValues = require('./lib/getStyle')();
+
 let workText = [0, 1].map(function (i) {return require('raw-loader!./work' + i + '.md');});
-let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {return require('raw-loader!./styles' + i + '.css');});
+
+const matchStyleVariable = /\'\$(\w+)\'/g;
+let styleText = [0, 1, 2, 3, 4, 5].map(function (i) {
+	const txt = require('raw-loader!./styles' + i + '.css');
+	return txt.replace(matchStyleVariable, function(match, name){
+		if(styleValues[name]){
+			return styleValues[name];
+		}
+		return match;
+	});
+
+});
 
 // Vars that will help us get er done
 const isDev = window.location.hostname === 'localhost';
@@ -39,6 +55,7 @@ async function startAnimation() {
 
 		await writeTo(styleEl, styleText[3], 0, speed/2, true, 1); // md styling, prepare to show CEO introduction
 		await writeTo(introEl, workText[1], 0, speed*2, false, 1);    // CEO introduction
+		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, speed/2, true, 1); // nothing
 		await writeTo(styleEl, styleText[5], 0, speed/2, true, 1); // end
 	}
@@ -56,6 +73,7 @@ async function startAnimation() {
 async function surprisinglyShortAttentionSpan() {
 	if (done) return;
 	done = true;
+	introEl.innerHTML = workText[1];
 	let txt = styleText.join('\n');
 
 	// The work-text animations are rough
@@ -200,7 +218,7 @@ function getWorkContentWithMd(txt) {
 //
 function createWorkBox() {
 	if (workEl.classList.contains('flipped')) return;
-	workEl.innerHTML = getWorkContentWithMd(workText.join(''));
+	workEl.innerHTML = getWorkContentWithMd(workText[0]);
 	workEl.scrollTop = 9999;
 	workEl.classList.add('flipped');
 
@@ -225,4 +243,8 @@ function createWorkBox() {
 		// Scroll. If we've flipped, flip the scroll direction.
 		workEl.scrollTop += (dy * (flipped ? -1 : 1));
 	}, true);
+}
+
+function createIntroBox(){
+	introEl.innerHTML = 	'<div class="md">' + replaceURLs(workText[1]) + '<div>';
 }

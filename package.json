@@ -19,6 +19,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "exports-loader": "^0.6.2",
     "raw-loader": "^0.5.1",
+    "url-loader": "^1.1.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   },
