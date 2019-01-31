@@ -44,16 +44,29 @@ let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
 // Vars that will help us get er done
 const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
+
+// Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
+const codeSpeed = speed * 0.5;
+const codeCommentSpeed = speed;
+const wordsSpeed = speed * 1.5;
+const beginingAndEndSpeed = speed * 2.5;
+
+
+// Chars per type: words comment * 1  link code * 2
+// NOTE: code chars can only be 1 per typing.
+const wordsTypingChars = 1;
+const linkTypingChars = 3;
+
 const PAGE_PADDING = 12;
 let style;
 let styleEl;
 let workEl;
 let introEl;
 let skipAnimationEl;
-let	pauseEl;
+let pauseEl;
 let animationSkipped = false;
 let done = false;
-let	paused = false;
+let paused = false;
 let browserPrefix;
 // Wait for load to get started.
 document.addEventListener('DOMContentLoaded', function () {
@@ -63,28 +76,28 @@ document.addEventListener('DOMContentLoaded', function () {
 	getEls();
 	createEventHandlers();
 	startAnimation();
-	easterEgg();
+	!isDev && easterEgg();
 });
 
 async function startAnimation() {
 	try {
-		await writeTo(styleEl, styleText[0], 0, speed * 1.5, true, 1); // introduction
-		await writeTo(styleEl, styleText[1], 0, speed / 2, true, 1); // initial styling
+		await writeTo(styleEl, styleText[0], 0, beginingAndEndSpeed, true, wordsTypingChars, 'fixed-speed'); // introduction
+		await writeTo(styleEl, styleText[1], 0, codeSpeed, true, 1); // initial styling
 		await fastWrite(workEl, aftershipTitle); // md of company introduction
-		await writeTo(workEl, workText[0], 0, speed, false, 2); // md of company introduction
-		await writeTo(styleEl, styleText[2], 0, speed / 2, true, 1); // prepare to convert md
+		await writeTo(workEl, workText[0], 0, wordsSpeed, false, wordsTypingChars); // md of company introduction
+		await writeTo(styleEl, styleText[2], 0, codeSpeed, true, 1); // prepare to convert md
 		createWorkBox();	// convert md
 		await Promise.delay(800);
 
 		await scrollToMdBottom(workEl); // scroll to the badge
-		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // continue to add work text
+		await writeTo(styleEl, styleText[3], 0, codeSpeed, true, 1); // continue to add work text
 		await addMoreWorkIntro(workEl, whyJoinUsHTML); // add more text
-		await writeTo(styleEl, styleText[6], 0, speed / 2, true, 1); // md styling, prepare to show CEO introduction
-		await writeTo(introEl, introText[0], 0, speed, false, 1); // CEO title
+		await writeTo(styleEl, styleText[6], 0, codeSpeed, true, 1); // md styling, prepare to show CEO introduction
+		await writeTo(introEl, introText[0], 0, speed, false, wordsTypingChars); // CEO title
 		createIntroBox(); // convert md
-		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
-		await writeTo(introEl, introText[1], 0, speed * 2, 'terminal', 1); // CEO introduction
-		await writeTo(styleEl, styleText[5], 0, speed / 2, true, 1); // end
+		await writeTo(styleEl, styleText[4], 0, codeSpeed, true, 1); // nothing
+		await writeTo(introEl, introText[1], 0, beginingAndEndSpeed, 'terminal', wordsTypingChars); // CEO introduction
+		await writeTo(styleEl, styleText[5], 0, codeSpeed, true, 1); // end
 	} catch (e) {
 		// Flow control straight from the ghettos of Milwaukee
 		if (e.message === 'SKIP IT') {
@@ -131,11 +144,85 @@ async function surprisinglyShortAttentionSpan() {
  * Helpers
  */
 
-const endOfSentence = /[?!]\s$/;
-const comma = /\D[,。]\s$/;
-const endOfBlock = /[^/]\n\n$/;
+function getIntervalByCheckIsComment() {
+	let openComment = false;
+	return (sliced3Chars) => {
+		const [preChar, curChar] = sliced3Chars;
 
-async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInterval) {
+		if (openComment && curChar !== '/') {
+			// Short-circuit during a comment so we don't highlight inside it.
+			return codeCommentSpeed;
+		}
+		if (curChar === '/' && !openComment) {
+			openComment = true;
+			return codeCommentSpeed;
+		}
+		if (curChar === '/' && preChar === '*' && openComment) {
+			openComment = false;
+			return codeCommentSpeed;
+		}
+		return null;
+	};
+}
+
+const regexSpace = /\s/;
+function checkIsLink(originalCharsPerInterval) {
+	let isLinkLikelyBegin = false;
+	let isLinkBegin = false;
+
+	return (sliced3Chars) => {
+		if (sliced3Chars === 'htt') {
+			isLinkLikelyBegin = true;
+		} else if (isLinkLikelyBegin && sliced3Chars === '://') {
+			isLinkBegin = true;
+			return linkTypingChars;
+		}
+
+		if ((isLinkLikelyBegin || isLinkBegin) && regexSpace.test(sliced3Chars)) {
+			isLinkLikelyBegin = false;
+			isLinkBegin = false;
+		}
+		if (isLinkBegin) {
+			return linkTypingChars;
+		}
+
+		return originalCharsPerInterval;
+	};
+}
+
+function writeTo(...arg) {
+	const [,,,, mirrorToStyle, charsPerInterval, rules] = arg;
+	// remove rule
+	const passingArg = arg.slice(0, 6);
+
+	const intervalPulgins = [];
+	const charsPerIntervalPulgins = [];
+	if (mirrorToStyle && rules !== 'fixed-speed') {
+		intervalPulgins.push(getIntervalByCheckIsComment());
+	}
+
+	charsPerIntervalPulgins.push(checkIsLink(charsPerInterval));
+
+	return doWriteTo(...passingArg, intervalPulgins, charsPerIntervalPulgins);
+}
+
+const comma = /\D(,\s|，|。)$/;
+const endOfSentence = /[?!]\s$/;
+const endOfBlock = /[^/]\n\n$/;
+/**
+ * write effect
+ * @param {object} el html element
+ * @param {string} message the text
+ * @param {number} index begin index of the message
+ * @param {number} interval the timing of each typing, number larger will be shower typing
+ * @param {bool|string:'terminal'} mirrorToStyle if apply to style, or is a terminal style
+ * @param {number} charsPerInterval how many chars of each typing
+ * @param {array} intervalPulgins
+ * @param {array} charsPerIntervalPulgins
+ */
+async function doWriteTo(
+	el, message, index, interval, mirrorToStyle, charsPerInterval, intervalPulgins, charsPerIntervalPulgins,
+) {
 	if (animationSkipped) {
 		// Lol who needs proper flow control
 		throw new Error('SKIP IT');
@@ -160,15 +247,29 @@ async function writeTo(el, message, index, interval, mirrorToStyle, charsPerInte
 	if (index < message.length) {
 		let thisInterval = interval;
 		const thisSlice = message.slice(index - 2, index + 1);
+
+		// run pulgins
+		const intervalValue = intervalPulgins
+			.map(pulgin => pulgin(thisSlice))
+			.find(val => val !== null);
+
+		if (typeof intervalValue !== 'undefined') {
+			thisInterval = intervalValue;
+		}
+
+		charsPerInterval = charsPerIntervalPulgins
+			.map(pulgin => pulgin(thisSlice))
+			.find(val => val !== null) || charsPerInterval;
+
 		if (comma.test(thisSlice)) thisInterval = interval * 3;
-		if (endOfBlock.test(thisSlice)) thisInterval = interval * 15;
-		if (endOfSentence.test(thisSlice)) thisInterval = interval * 30;
+		else if (endOfSentence.test(thisSlice)) thisInterval = interval * 10;
+		else if (endOfBlock.test(thisSlice)) thisInterval = interval * 15;
 
 		do {
 			await Promise.delay(thisInterval);
 		} while (paused);
 
-		return writeTo(el, message, index, interval, mirrorToStyle, charsPerInterval);
+		return doWriteTo(el, message, index, interval, mirrorToStyle, charsPerInterval, intervalPulgins, charsPerIntervalPulgins);
 	}
 }
 
