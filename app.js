@@ -46,7 +46,7 @@ const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 
 // Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
-const codeSpeed = speed * 0.5;
+const codeSpeed = speed * 0.3;
 const codeCommentSpeed = speed;
 const wordsSpeed = speed * 1.5;
 const beginingAndEndSpeed = speed * 2.5;
@@ -55,7 +55,7 @@ const beginingAndEndSpeed = speed * 2.5;
 // Chars per type: words comment * 1  link code * 2
 // NOTE: code chars can only be 1 per typing.
 const wordsTypingChars = 1;
-const linkTypingChars = 3;
+const linkTypingChars = 2;
 
 const PAGE_PADDING = 12;
 let style;
@@ -262,7 +262,7 @@ async function doWriteTo(
 			.find(val => val !== null) || charsPerInterval;
 
 		if (comma.test(thisSlice)) thisInterval = interval * 3;
-		else if (endOfSentence.test(thisSlice)) thisInterval = interval * 10;
+		else if (endOfSentence.test(thisSlice)) thisInterval = interval * 8;
 		else if (endOfBlock.test(thisSlice)) thisInterval = interval * 15;
 
 		do {

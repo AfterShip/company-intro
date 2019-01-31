@@ -11,10 +11,9 @@ AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟�
 * Paypal
 * Etsy 
 
-
 ## 产品数据
 
-* 每分钟 10万+ API 请求
+* 每分钟 10 万+ API 请求
 * 每月 20 亿+ 数据
 * 每月 5 千万+ 包裹查询
 * 每月网页 PV 5 千万+
@@ -22,7 +21,6 @@ AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟�
 * 支持 500+ 快递公司
 * 覆盖 200+ 国家
 * SLA 99.95% 在线
-
 
 ## 发展大事记
 
@@ -34,8 +32,7 @@ AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟�
 * 2017年4月，成立印度分公司，组建全球客户服务中心
 * 2018年1月，上线新产品 Return Center
 * 2018年4月，成立深圳分公司，组建深圳研发中心
-* 2019年1月，付费用户超过100,000家
-
+* 2019年1月，付费用户超过 100,000 家
 
 ## 使用的技术 
 
@@ -47,7 +44,6 @@ AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟�
 * 开发工具: GitHub, JIRA, Jenkins 
 * 监控工具: New Relic, PagerDuty, Statuspage, Pingdom
 * 团体沟通: Slack, Gmail, Google Drive, Zoom, 1Password
-
 
 ## 对技术的要求
 
