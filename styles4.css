@@ -1,9 +1,8 @@
 
-'$blockMob'
+'$secondStageBlockWorkAndStyle'
+
 #intro-text {
   margin-top: '$introMarginTop';
   background: rgb(34,43,52);
   height: '$introH';
 }
-
-#work-text, #style-text { max-height: '$maxH'; }
