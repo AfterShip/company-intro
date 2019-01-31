@@ -74,7 +74,7 @@ async function startAnimation() {
 		await writeTo(workEl, workText[0], 0, speed, false, 2); // md of company introduction
 		await writeTo(styleEl, styleText[2], 0, speed / 2, true, 1); // prepare to convert md
 		createWorkBox();	// convert md
-		await Promise.delay(1000);
+		await Promise.delay(800);
 
 		await scrollToMdBottom(workEl); // scroll to the badge
 		await writeTo(styleEl, styleText[3], 0, speed / 2, true, 1); // continue to add work text
@@ -83,7 +83,7 @@ async function startAnimation() {
 		await writeTo(introEl, introText[0], 0, speed, false, 1); // CEO title
 		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, speed / 2, true, 1); // nothing
-		await writeTo(introEl, introText[1], 0, speed * 1.5, 'terminal', 1); // CEO introduction
+		await writeTo(introEl, introText[1], 0, speed * 2, 'terminal', 1); // CEO introduction
 		await writeTo(styleEl, styleText[5], 0, speed / 2, true, 1); // end
 	} catch (e) {
 		// Flow control straight from the ghettos of Milwaukee
