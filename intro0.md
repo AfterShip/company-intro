@@ -1,2 +1,2 @@
 
-$tedy **AfterShip 的 CEO -- 陈龙生**
+![teddy](./teddy.png) **AfterShip 的 CEO -- 陈龙生**
