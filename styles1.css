@@ -36,16 +36,7 @@ pre, a {
  * 我要让它看起来舒服些
  */
 
-#content{
-  margin-top: '$introMarginTop';
-}
-
-pre:not(:empty){
-  padding: 10px 20px 20px;
-}
-
 pre {
-  overflow: auto;
   width:'$preWidth';
   background: #1b2123;
   font-size: 15px;
@@ -53,6 +44,13 @@ pre {
   font-family: monospace;
   border-radius: 6px;
 }
+pre:not(:empty) { 
+  padding: 10px 20px 20px; 
+}
+#content { 
+  margin-top: '$introMarginTop'; 
+}
+
 
 
 /**
