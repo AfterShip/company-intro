@@ -1,7 +1,6 @@
 
 
 const path = require('path');
-const webpack = require('webpack');
 
 // Builds bundle usable inside <script>.
 module.exports = {
@@ -45,10 +44,5 @@ module.exports = {
 		compress: true,
 		port: 4003,
 	},
-	plugins: [
-		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
-	],
-	resolve: {
-	},
+	resolve: {},
 };
