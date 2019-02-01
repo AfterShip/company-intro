@@ -14,10 +14,12 @@ import writeChar, {
 // template
 import containerHTML from './container.html';
 import whyJoinUsHTML from './whyJoinUs.html';
-import introCEOTitle from './introCEOTitle.html';
+import workTextTitleRaw from './workTextTitle.html';
+import introCEOTitleRaw from './introCEOTitle.html';
 import preStyles from './prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import insetStyleVariable from './lib/insetStyleVariable';
+import template from './lib/template';
 import {runScroll} from './lib/animate';
 
 import getPrefix from './lib/getPrefix';
@@ -25,7 +27,7 @@ import getPrefix from './lib/getPrefix';
 import getMd from './lib/getMd';
 import {getBodyMargin} from './lib/utils';
 
-import {workImgs} from './lib/imgs';
+import {workImgs, teddyImg, logoImg} from './lib/imgs';
 
 import easterEgg from './lib/easterEgg';
 import ga from './lib/ga';
@@ -38,7 +40,8 @@ const introText = [0, 1].map(function (i) {
 });
 
 // image element
-const aftershipTitle = '<header>AfterShip</header>';
+const aftershipTitle = template(workTextTitleRaw, {logoImg});
+const introCEOTitle = template(introCEOTitleRaw, {teddyImg});
 
 let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
 	const txt = require('./styles' + i + '.css');

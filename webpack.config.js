@@ -30,9 +30,9 @@ module.exports = {
 			},
 			{
 				test: [/\.gif$/, /\.jpe?g$/, /\.png$/],
-				loader: 'url-loader',
+				loader: 'base64-inline-loader',
 				options: {
-					limit: 999999,
+					limit: Infinity,
 					mimetype: 'image/png',
 				},
 			},

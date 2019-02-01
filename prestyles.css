@@ -93,7 +93,6 @@ pre {
 	width: 138px;
 	height: 136px;
 	display: inline-block;
-	background: url(../img/tedy.png);
 }
 
 .img-tedy + .title{
@@ -104,7 +103,7 @@ pre {
 #work-text header {
 	width: 180px;
 	height: 54px;
-	background: url(../img/logo.png) no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	position: relative;
 	overflow: hidden;
