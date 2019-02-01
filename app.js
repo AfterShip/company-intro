@@ -1,6 +1,7 @@
 /* eslint max-params: "off" */
 /* eslint consistent-return: "off" */
 /* eslint no-param-reassign: "off" */
+/* eslint no-implicit-coercion: "off" */
 
 import 'classlist-polyfill';
 // eslint-disable-next-line
@@ -43,14 +44,15 @@ let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
 });
 
 // Vars that will help us get er done
-const isDev = 0; window.location.hostname === 'localhost';
+const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 
 // Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
-const codeSpeed = speed * 0.3;
-const codeCommentSpeed = speed;
-const wordsSpeed = speed * 1.5;
-const beginingAndEndSpeed = speed * 2.5;
+const codeSpeed = speed * 0.2;
+const codeCommentSpeed = speed * 1;
+const wordsSpeed = speed * 1;
+const beginingSpeed = speed * 2;
+const endSpeed = speed * 1.5;
 
 
 // Chars per type: words comment * 1  link code * 2
@@ -83,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function startAnimation() {
 	try {
-		await writeTo(styleEl, styleText[0], 0, beginingAndEndSpeed, true, wordsTypingChars, 'fixed-speed'); // introduction
+		await writeTo(styleEl, styleText[0], 0, beginingSpeed, true, wordsTypingChars, 'fixed-speed'); // introduction
 		await writeTo(styleEl, styleText[1], 0, codeSpeed, true, 1); // initial styling
 		await fastWrite(workEl, aftershipTitle); // md of company introduction
 		await writeTo(workEl, workText[0], 0, wordsSpeed, false, wordsTypingChars); // md of company introduction
@@ -98,7 +100,7 @@ async function startAnimation() {
 		await writeTo(introEl, introText[0], 0, speed, false, wordsTypingChars); // CEO title
 		createIntroBox(); // convert md
 		await writeTo(styleEl, styleText[4], 0, codeSpeed, true, 1); // nothing
-		await writeTo(introEl, introText[1], 0, beginingAndEndSpeed, 'terminal', wordsTypingChars); // CEO introduction
+		await writeTo(introEl, introText[1], 0, endSpeed, 'terminal', wordsTypingChars); // CEO introduction
 		await writeTo(styleEl, styleText[5], 0, codeSpeed, true, 1); // end
 	} catch (e) {
 		// Flow control straight from the ghettos of Milwaukee
@@ -263,9 +265,9 @@ async function doWriteTo(
 			.map(pulgin => pulgin(thisSlice))
 			.find(val => val !== null) || charsPerInterval;
 
-		if (comma.test(thisSlice)) thisInterval = interval * 3;
-		else if (endOfSentence.test(thisSlice)) thisInterval = interval * 8;
-		else if (endOfBlock.test(thisSlice)) thisInterval = interval * 15;
+		if (comma.test(thisSlice)) thisInterval = interval * 8;
+		else if (endOfSentence.test(thisSlice)) thisInterval = interval * 15;
+		else if (endOfBlock.test(thisSlice)) thisInterval = interval * 20;
 
 		do {
 			await Promise.delay(thisInterval);
