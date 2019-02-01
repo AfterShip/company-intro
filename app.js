@@ -21,7 +21,7 @@ import insetStyleVariable from './lib/insetStyleVariable';
 import {runScroll} from './lib/animate';
 
 import getPrefix from './lib/getPrefix';
-// import isMoblie from './lib/isMobile';
+import isMoblie from './lib/isMobile';
 import getMd from './lib/getMd';
 
 import {workImgs} from './lib/imgs';
@@ -49,11 +49,11 @@ const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 
 // Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
-const codeSpeed = speed * 0.2;
-const codeCommentSpeed = speed * 1;
+const codeSpeed = speed * (isMoblie ? 0.5 : 0.2);
+const codeCommentSpeed = speed * (isMoblie ? 2 : 1.5);
 const wordsSpeed = speed * 1;
 const beginingSpeed = speed * 2;
-const endSpeed = speed * 2;
+const endSpeed = speed * (isMoblie ? 2.5 : 2);
 
 
 // Chars per type: words comment * 1  link code * 2
