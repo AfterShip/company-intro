@@ -12,7 +12,7 @@ import writeChar, {
 } from './lib/writeChar';
 
 // template
-import headerHTML from './header.html';
+import containerHTML from './container.html';
 import whyJoinUsHTML from './whyJoinUs.html';
 import introCEOTitle from './introCEOTitle.html';
 import preStyles from './prestyles.css';
@@ -21,8 +21,9 @@ import insetStyleVariable from './lib/insetStyleVariable';
 import {runScroll} from './lib/animate';
 
 import getPrefix from './lib/getPrefix';
-import isMoblie from './lib/isMobile';
+// import isMoblie from './lib/isMobile';
 import getMd from './lib/getMd';
+import {getBodyMargin} from './lib/utils';
 
 import {workImgs} from './lib/imgs';
 
@@ -49,11 +50,11 @@ const isDev = window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 
 // Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
-const codeSpeed = speed * (isMoblie ? 0.5 : 0.2);
-const codeCommentSpeed = speed * (isMoblie ? 2 : 1.5);
+const codeSpeed = speed * 0;
+const codeCommentSpeed = speed * 1;
 const wordsSpeed = speed * 1;
 const beginingSpeed = speed * 2;
-const endSpeed = speed * (isMoblie ? 2.5 : 2);
+const endSpeed = speed * 2;
 
 
 // Chars per type: words comment * 1  link code * 2
@@ -74,9 +75,9 @@ let paused = false;
 let browserPrefix;
 // Wait for load to get started.
 document.addEventListener('DOMContentLoaded', function () {
+	populateContainer();
 	preSetStyle();
 	getBrowserPrefix();
-	populateHeader();
 	getEls();
 	createEventHandlers();
 	startAnimation();
@@ -307,7 +308,8 @@ async function addHtmlToFlippyElement(el, html, scrollParent) {
 
 function preSetStyle() {
 	const h = document.documentElement.clientHeight;
-	document.getElementById('content').style.height = (h - PAGE_PADDING * 2) + 'px';
+	const bodyMargin = getBodyMargin();
+	document.getElementById('content').style.height = (h - PAGE_PADDING * 2 - bodyMargin) + 'px';
 }
 
 //
@@ -343,9 +345,9 @@ function getEls() {
 //
 // Create links in header (now footer).
 //
-function populateHeader() {
-	const header = document.getElementById('header');
-	header.innerHTML = headerHTML;
+function populateContainer() {
+	const container = document.getElementById('container');
+	container.innerHTML = containerHTML;
 }
 
 //

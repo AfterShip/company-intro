@@ -47,11 +47,6 @@ pre {
 pre:not(:empty) { 
   padding: 10px 20px 20px; 
 }
-#content { 
-  margin-top: '$introMarginTop'; 
-}
-
-
 
 /**
  * 这样好点了. 但是所有代码都是白色的啊~

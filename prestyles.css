@@ -1,22 +1,19 @@
 /* I'm cheating a lot 🤪 */
 
-html, body {
-	margin-top: 0;
-	height: 100%;
+.af {
+	/* height will controlled by script */
+	margin: 0 auto;
+	max-width:1200px;
 	overflow: hidden;
 	font-size: 14px;
-}
-
-body {
 	-webkit-perspective: 1000px;
 	perspective: 1000px;
 	padding: 12px '$bodyPaddingLeftRig' 20px;
 }
-
-* {
+.af * {
 	box-sizing: border-box;
 }
-
+/* be ware of polluted */
 pre {
 	margin: 0;
 	overflow: auto;
@@ -34,7 +31,7 @@ pre {
 }
 
 #header {
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	height: 20px;
 	left: 0;
@@ -45,7 +42,7 @@ pre {
 	border-radius: 3px;
 }
 
-a:after {
+.af a:after {
 	content: '';
 	margin: 0 5px;
 	border-right-width: 1px;
@@ -53,7 +50,7 @@ a:after {
 	border-color: inherit;
 }
 
-a:last-of-type:after {
+.af a:last-of-type:after {
 	border: none;
 }
 
@@ -65,12 +62,16 @@ a:last-of-type:after {
 	margin: 5px 0;
 }
 
-.md h1, .md h2, .md h3, .md h4, .md h5, .md h6 {
+.md h1, .md h2, .md h3 {
 	margin: 20px 0 10px;
 }
 
+.md h4, .md h5, .md h6 {
+	margin: 10px 0 5px;
+}
+
 .md ul, .md p {
-	margin: 10px 0;
+	margin: 8px 0;
 }
 
 .md h1, .md h2 {
@@ -88,9 +89,6 @@ a:last-of-type:after {
 	transform: translateX(0);
 }
 
-.title-wrap{
-	padding-bottom:12px;
-}
 .img-tedy {
 	width: 138px;
 	height: 136px;
@@ -147,35 +145,4 @@ a:last-of-type:after {
 
 .terminal-user {
 	color: rgb(91, 104, 117);
-}
-
-/* table */
-
-.markdown-body table {
-	display: block;
-	overflow: auto;
-	width: 100%;
-	border-collapse: collapse;
-}
-
-.markdown-body table th {
-	font-weight: 600
-}
-
-.markdown-body table td, .markdown-body table th {
-	border: 1px solid #dfe2e5;
-	padding: 6px 13px
-}
-
-.markdown-body table tr {
-	background-color: #fff;
-	border-top: 1px solid #c6cbd1
-}
-
-.markdown-body table tr:nth-child(2n) {
-	background-color: #f6f8fa
-}
-
-.markdown-body table img {
-	background-color: transparent
 }

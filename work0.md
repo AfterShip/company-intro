@@ -36,11 +36,11 @@ AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟�
 
 ## 使用的技术 
 
-* 开发语言: JavaScript (Node.js), Python, PHP
-* 最新技术: Kubernetes, TensorFlow, Serverless, Microservice
-* 应用框架: React.js, Koa.js, Tornado, Scrapy
-* 数据库:   MongoDB, Redis, GCP Spanner, AWS Dynamodb
-* 云服务器: AWS, GCP
-* 开发工具: GitHub, JIRA, Jenkins 
-* 监控工具: New Relic, PagerDuty, Statuspage, Pingdom
-* 团体沟通: Slack, Gmail, Google Drive, Zoom, 1Password
+* **开发语言:** JavaScript (Node.js), Python, PHP
+* **最新技术:** Kubernetes, TensorFlow, Serverless, Microservice
+* **应用框架:** React.js, Koa.js, Tornado, Scrapy
+* **数据库:**   MongoDB, Redis, GCP Spanner, AWS Dynamodb
+* **云服务器:** AWS, GCP
+* **开发工具:** GitHub, JIRA, Jenkins 
+* **监控工具:** New Relic, PagerDuty, Statuspage, Pingdom
+* **团体沟通:** Slack, Gmail, Google Drive, Zoom, 1Password
