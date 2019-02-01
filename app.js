@@ -25,6 +25,7 @@ import getMd from './lib/getMd';
 import {workImgs, introImgs} from './lib/imgs';
 
 import easterEgg from './lib/easterEgg';
+import ga from './lib/ga';
 
 const workText = [0].map(function (i) {
 	return require('./work' + i + '.md');
@@ -42,7 +43,7 @@ let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
 });
 
 // Vars that will help us get er done
-const isDev = window.location.hostname === 'localhost';
+const isDev = 0; window.location.hostname === 'localhost';
 const speed = isDev ? 0 : 16;
 
 // Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	createEventHandlers();
 	startAnimation();
 	!isDev && easterEgg();
+	!isDev && ga();
 });
 
 async function startAnimation() {
