@@ -88,11 +88,19 @@ a:last-of-type:after {
 	transform: translateX(0);
 }
 
+.title-wrap{
+	padding-bottom:12px;
+}
 .img-tedy {
 	width: 138px;
 	height: 136px;
 	display: inline-block;
 	background: url(../img/tedy.png);
+}
+
+.img-tedy + .title{
+	display: inline-block;
+	padding-left: 12px;
 }
 
 #work-text header {

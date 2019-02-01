@@ -14,6 +14,7 @@ import writeChar, {
 // template
 import headerHTML from './header.html';
 import whyJoinUsHTML from './whyJoinUs.html';
+import introCEOTitle from './introCEOTitle.html';
 import preStyles from './prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import insetStyleVariable from './lib/insetStyleVariable';
@@ -23,7 +24,7 @@ import getPrefix from './lib/getPrefix';
 // import isMoblie from './lib/isMobile';
 import getMd from './lib/getMd';
 
-import {workImgs, introImgs} from './lib/imgs';
+import {workImgs} from './lib/imgs';
 
 import easterEgg from './lib/easterEgg';
 import ga from './lib/ga';
@@ -96,8 +97,7 @@ async function startAnimation() {
 		await writeTo(styleEl, styleText[3], 0, codeSpeed, true, 1); // continue to add work text
 		await addMoreWorkIntro(workEl, whyJoinUsHTML); // add more text
 		await writeTo(styleEl, styleText[6], 0, codeSpeed, true, 1); // md styling, prepare to show CEO introduction
-		await writeTo(introEl, introText[0], 0, speed, false, wordsTypingChars); // CEO title
-		createIntroBox(); // convert md
+		await fastWrite(introEl, introCEOTitle);
 		await writeTo(styleEl, styleText[4], 0, codeSpeed, true, 1); // nothing
 		await writeTo(introEl, introText[1], 0, endSpeed, 'terminal', wordsTypingChars); // CEO introduction
 		await writeTo(styleEl, styleText[5], 0, codeSpeed, true, 1); // end
@@ -128,8 +128,8 @@ async function surprisinglyShortAttentionSpan() {
 
 	createWorkBox();
 
-	createIntroBox();
-	introEl.innerHTML += introText[1];
+	fastWrite(introEl, introCEOTitle);
+	fastWrite(introEl, introText[1]);
 
 	await addMoreWorkIntro(workEl, whyJoinUsHTML);
 
@@ -277,7 +277,7 @@ async function doWriteTo(
 }
 
 async function fastWrite(el, message) {
-	el.innerHTML += message;
+	el.innerHTML += message.replace(/\n/g, '').replace(/(\s\s|\t)+/g, '');
 }
 
 async function addMoreWorkIntro(el, html) {
@@ -296,7 +296,8 @@ async function scrollToMdBottom(el, timing = 300) {
 }
 async function addHtmlToFlippyElement(el, html, scrollParent) {
 	const originalH = el.offsetHeight;
-	el.innerHTML += html.replace(/\n/g, '').replace(/(\s\s|\t)+/g, '');
+	fastWrite(el, html);
+
 	// jump to original view position
 	scrollParent.scrollTop += el.offsetHeight - originalH;
 	// animate scroll
@@ -412,6 +413,6 @@ function createWorkBox() {
 	}, true);
 }
 
-function createIntroBox() {
-	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(introText[0], introImgs)) + '<div>';
-}
+// function createIntroBox() {
+// 	introEl.innerHTML = '<div class="md">' + replaceURLs(getMd(introText[0], introImgs)) + '<div>';
+// }
