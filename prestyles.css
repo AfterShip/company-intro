@@ -1,4 +1,4 @@
-/* I'm cheating a bit */
+/* I'm cheating a lot 🤪 */
 
 html, body {
 	margin-top: 0;
@@ -108,11 +108,20 @@ a:last-of-type:after {
 
 #work-text .badge {
 	width: 100%;
-	max-width: 990px;
-	height: 0;
-	padding: 10%;
-	background: url(../img/badge.png) no-repeat;
-	background-size: 100% auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+.badge>img{
+	margin: 8px 5px;
+}
+
+#work-text.flipped {
+	transform: '$workTxtTrans' rotateY(180deg) rotateZ(180deg);
+}
+
+#work-text .md {
+	transform: rotateY(180deg) rotateZ(180deg);
+	margin-top: 800px;
 }
 
 @keyframes fadeIn {

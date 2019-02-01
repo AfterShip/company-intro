@@ -52,7 +52,7 @@ const codeSpeed = speed * 0.2;
 const codeCommentSpeed = speed * 1;
 const wordsSpeed = speed * 1;
 const beginingSpeed = speed * 2;
-const endSpeed = speed * 1.5;
+const endSpeed = speed * 2;
 
 
 // Chars per type: words comment * 1  link code * 2
@@ -89,7 +89,6 @@ async function startAnimation() {
 		await writeTo(styleEl, styleText[1], 0, codeSpeed, true, 1); // initial styling
 		await fastWrite(workEl, aftershipTitle); // md of company introduction
 		await writeTo(workEl, workText[0], 0, wordsSpeed, false, wordsTypingChars); // md of company introduction
-		await writeTo(styleEl, styleText[2], 0, codeSpeed, true, 1); // prepare to convert md
 		createWorkBox();	// convert md
 		await Promise.delay(800);
 
