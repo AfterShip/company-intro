@@ -12,11 +12,11 @@ import writeChar, {
 } from './lib/writeChar';
 
 // template
-import containerHTML from './container.html';
-import whyJoinUsHTML from './whyJoinUs.html';
-import workTextTitleRaw from './workTextTitle.html';
-import introCEOTitleRaw from './introCEOTitle.html';
-import preStyles from './prestyles.css';
+import containerHTML from './views/container.html';
+import whyJoinUsHTML from './views/whyJoinUs.html';
+import workTextTitleRaw from './views/workTextTitle.html';
+import introCEOTitleRaw from './views/introCEOTitle.html';
+import preStyles from './styles/prestyles.css';
 import replaceURLs from './lib/replaceURLs';
 import insetStyleVariable from './lib/insetStyleVariable';
 import template from './lib/template';
@@ -33,10 +33,10 @@ import easterEgg from './lib/easterEgg';
 import ga from './lib/ga';
 
 const workText = [0].map(function (i) {
-	return require('./work' + i + '.md');
+	return require('./views/work' + i + '.md');
 });
 const introText = [0, 1].map(function (i) {
-	return require('./intro' + i + '.md');
+	return require('./views/intro' + i + '.md');
 });
 
 // image element
@@ -44,7 +44,7 @@ const aftershipTitle = template(workTextTitleRaw, {logoImg});
 const introCEOTitle = template(introCEOTitleRaw, {teddyImg});
 
 let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
-	const txt = require('./styles' + i + '.css');
+	const txt = require('./styles/styles' + i + '.css');
 	return insetStyleVariable(txt);
 });
 
