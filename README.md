@@ -18,7 +18,7 @@ We like to show case our engineering culture, from hiring to PR marketing. See o
 This introduction page inspired and modify from [https://github.com/STRML/strml.net](https://github.com/STRML/strml.net).
 We think that the live automatic coding and typing introduction text are pretty cool, hope you guys like it. 🤗
 
-In order to cut back the animation time and get more time to show the company introduction, we actually have cheated a bit that we added some initial style in advance 😝
+In order to cut back the animation time and get more time to show the company introduction, we actually have cheated a bit by adding some initial style in advance 😝
 
 
 ## Usage
