@@ -1,23 +1,46 @@
 # introduction-company-hiring
 
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg) 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-[![JavaScript Style](https://img.shields.io/badge/code%20style-AfterShip-brightgreen.svg?style=flat)](https://github.com/AfterShip/eslint-config-aftership)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 [![Build Status](https://travis-ci.com/AfterShip/company-intro.svg?token=DEzyyuVSmnezkFBUNRvc&branch=master)](https://travis-ci.com/AfterShip/company-intro)
-
+[![JavaScript Style](https://img.shields.io/badge/code%20style-aftership-brightgreen.svg)](https://github.com/AfterShip/eslint-config-aftership)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg) 
 
 
 We like to show case our engineering culture, from hiring to PR marketing. See our live demo here: https://jobs.aftership.com/v1/about-us
 
 
-## Scripts
+## About
 
-| name    | function                | comments |
-| :------ | :---------------------- | :------- |
-| `dev`   | start local developing  | N/A      |
-| `build` | build the static assets | N/A      |
+This introduction page inspired and modify from [https://github.com/STRML/strml.net](https://github.com/STRML/strml.net).
+We think that the live automatic coding and typing introduction text are pretty cool, hope you guys like it. 🤗
+
+In order to cut back the animation time and get more time to show the company introduction, we actually have cheated a bit that we added some initial style in advance 😝
 
 
+## Usage
+
+* Clone this repo to local:
+  	
+	`git clone git@github.com:AfterShip/company-intro.git`
+	
+	`cd company-intro`
+
+* Install dependencies:
+	
+	`npm install` or `yarn install`
+
+* Then run it locally:
+  
+   `npm run dev` or `yarn dev`
+
+   it will open page `http://localhost:4003` on browser automatically
+
+Noticed that when run locally, the animation speed has been set to very fast. To make it run normally at local, we can go to [app.js#L52](https://github.com/AfterShip/company-intro/blob/fd5581decdde08137addcfc76ef3d9beca869cd1/app.js#L52), and modify the variable `isDev` to `false`.
+
+
+## Build
+
+Run `npm run build` or `yarn build`, it will output complied file to `/dist`.
 
 
 ## License
