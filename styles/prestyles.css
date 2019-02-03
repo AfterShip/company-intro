@@ -9,6 +9,7 @@
 	-webkit-perspective: 1000px;
 	perspective: 1000px;
 	padding: 12px '$bodyPaddingLeftRig' 20px;
+	box-sizing: border-box;
 }
 .af * {
 	box-sizing: border-box;
