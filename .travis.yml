@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "8"
+sudo: false
+
+env:
+  - CACHE_DIR=cache
+
+cache:
+  directories:
+    - $CACHE_DIR
+
+script:
+  - . ./scripts/ci/run.sh

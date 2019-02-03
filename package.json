@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --open",
     "watch": "webpack --progress --watch",
     "lint": "eslint . --ext=js,jsx",
-    "build": "webpack -p && node ./scripts/modifyApp.js"
+    "build": "webpack -p"
   },
   "author": "Samuel Reed <samuel.trace.reed@gmail.com> (http://strml.net/)",
   "license": "MIT",
