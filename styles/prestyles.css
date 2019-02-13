@@ -15,7 +15,6 @@
 }
 /* be ware of polluted */
 pre {
-	margin: 0;
 	overflow: auto;
 	max-height: 90%;
 	width: 100%;
@@ -24,6 +23,9 @@ pre {
 	white-space: pre-wrap;
 	outline: 0;
 	-webkit-overflow-scrolling: touch;
+}
+.af pre{
+	margin:0;
 }
 
 /* reset container background */
@@ -111,9 +113,6 @@ pre {
 	height: 54px;
 	background-repeat: no-repeat;
 	background-size: contain;
-	position: relative;
-	overflow: hidden;
-	text-indent: -99999px;
 	margin-bottom: 12px;
 }
 

@@ -25,7 +25,6 @@ import {runScroll} from './lib/animate';
 import getPrefix from './lib/getPrefix';
 // import isMoblie from './lib/isMobile';
 import getMd from './lib/getMd';
-import {getBodyMargin} from './lib/utils';
 
 import {workImgs, teddyImg, logoImg} from './lib/imgs';
 
@@ -66,6 +65,7 @@ const wordsTypingChars = 1;
 const linkTypingChars = 2;
 
 const PAGE_PADDING = 12;
+let containerEl;
 let style;
 let styleEl;
 let workEl;
@@ -77,7 +77,7 @@ let done = false;
 let paused = false;
 let browserPrefix;
 // Wait for load to get started.
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
 	populateContainer();
 	preSetStyle();
 	getBrowserPrefix();
@@ -311,8 +311,9 @@ async function addHtmlToFlippyElement(el, html, scrollParent) {
 
 function preSetStyle() {
 	const h = document.documentElement.clientHeight;
-	const bodyMargin = getBodyMargin();
-	document.getElementById('content').style.height = (h - PAGE_PADDING * 2 - bodyMargin) + 'px';
+	const contentEl = document.getElementById('content');
+
+	contentEl.style.height = (h - PAGE_PADDING * 2 - containerEl.getBoundingClientRect().top) + 'px';
 }
 
 //
@@ -354,8 +355,17 @@ function getEls() {
 // Create links in header (now footer).
 //
 function populateContainer() {
-	const container = document.getElementById('container');
-	container.innerHTML = containerHTML;
+	// page-body-wrapper is squarespace page's body id
+	containerEl = document.getElementById('container') || document.getElementById('page-body-wrapper');
+
+	if (!containerEl) {
+		throw new Error('Container not found.');
+	}
+
+	// force id to 'container'
+	containerEl.id = 'container';
+
+	containerEl.innerHTML = containerHTML;
 }
 
 //
