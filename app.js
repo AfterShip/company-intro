@@ -334,10 +334,15 @@ function getEls() {
 	// We're cheating a bit on styles.
 	const preStyleEl = document.createElement('style');
 	preStyleEl.textContent = insetStyleVariable(preStyles);
+
+	// For live styling container
+	style = document.createElement('style');
+
+	document.head.insertBefore(style, document.getElementsByTagName('style')[0]);
 	document.head.insertBefore(preStyleEl, document.getElementsByTagName('style')[0]);
 
+
 	// El refs
-	style = document.getElementById('style-tag');
 	styleEl = document.getElementById('style-text');
 	workEl = document.getElementById('work-text');
 	introEl = document.getElementById('intro-text');
