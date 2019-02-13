@@ -4,7 +4,6 @@
 	/* height will controlled by script */
 	margin: 0 auto;
 	max-width:1200px;
-	overflow: hidden;
 	font-size: 14px;
 	-webkit-perspective: 1000px;
 	perspective: 1000px;
@@ -27,6 +26,11 @@ pre {
 	-webkit-overflow-scrolling: touch;
 }
 
+/* reset container background */
+#container{
+	background:#fff;
+}
+
 #content {
 	position: relative;
 }
@@ -34,13 +38,14 @@ pre {
 #header {
 	position: absolute;
 	bottom: 0;
-	height: 20px;
+	height: 30px;
 	left: 0;
 	right: 0;
-	padding: 0 10px;
+	padding: 5px 12px;
 	z-index: 10;
 	background: rgba(0, 0, 0, .3);
 	border-radius: 3px;
+	font-size: 16px;
 }
 
 .af a:after {

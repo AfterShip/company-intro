@@ -14,14 +14,9 @@
  * 白底黑字有点无聊啊, 让我们加点样式
  */
 
-html {
-  background: #252f33;
+#container {
+  background: #0c0f14;
 }
-
-
-/***
- * 等等...
- */
 
 pre, a {
   color: white;
@@ -70,10 +65,6 @@ pre:not(:empty) {
   transform: translateX(0);
   width: '$styleTxtW';
 }
-html {
-  background: #0c0f14;
-}
-  
 
 
 /**
