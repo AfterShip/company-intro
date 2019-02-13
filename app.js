@@ -8,7 +8,7 @@ import 'classlist-polyfill';
 import Promise from 'bluebird';
 
 import writeChar, {
-	writeSimpleChar, handleChar, writeTerminal,
+	writeSimpleChar, handleChar, writeTerminal, handleTerminalChar,
 } from './lib/writeChar';
 
 // template
@@ -132,9 +132,15 @@ async function surprisinglyShortAttentionSpan() {
 
 	createWorkBox();
 
+	// introduce CEO text
+	let introCEOHTML = '';
+	for (let i = 0; i < introText[1].length; i++) {
+		introCEOHTML = handleTerminalChar(introCEOHTML, introText[1][i]);
+	}
 	fastWrite(introEl, introCEOTitle);
-	fastWrite(introEl, introText[1]);
+	fastWrite(introEl, introCEOHTML);
 
+	// work introduce
 	await addMoreWorkIntro(workEl, whyJoinUsHTML);
 
 	// There's a bit of a scroll problem with this thing
