@@ -296,9 +296,10 @@ async function addMoreWorkIntro(el, html) {
 }
 
 async function scrollToMdBottom(el, timing = 300) {
-	const gap = 500;
-	const mdWrapper = el.querySelector('.text');
-	const hMd = mdWrapper.offsetHeight;
+	const gap = 100;
+	// const mdWrapper = el.querySelector('.text');
+	// const hMd = mdWrapper.offsetHeight;
+	const hMd = 0;
 
 	// scroll
 	await runScroll(el, 'cur', hMd + gap, timing);
@@ -404,8 +405,8 @@ function createEventHandlers() {
 
 function getWorkContentWithMd() {
 	const [txt] = workText;
-	return '<div class="text">' + replaceURLs(txt) + '</div>'
-		+ '<div class="md">' + aftershipTitle + replaceURLs(getMd(txt, workImgs)) + '<div>';
+	// raw text '<div class="text">' + replaceURLs(txt) + '</div>'
+	return '<div class="md">' + aftershipTitle + replaceURLs(getMd(txt, workImgs)) + '<div>';
 }
 //
 // Fire a listener when scrolling the 'work' box.
@@ -418,7 +419,7 @@ function createWorkBox() {
 
 
 	// flippy floppy
-	let flipping = false;
+	// let flipping = false;
 	// when can trigger mouse wheel, we need to disable browser's default scrolling
 	let disableOriginalScroll = false;
 
@@ -428,21 +429,19 @@ function createWorkBox() {
 			workEl.style.overflow = 'hidden';
 		}
 
-		if (flipping) return;
+		// if (flipping) return;
 		const flipped = workEl.classList.contains('flipped');
-		const half = (workEl.scrollHeight - workEl.clientHeight) / 2;
-		const pastHalf = flipped ? workEl.scrollTop < half : workEl.scrollTop > half;
+		// const half = (workEl.scrollHeight - workEl.clientHeight) / 2;
+		// const pastHalf = flipped ? workEl.scrollTop < half : workEl.scrollTop > half;
 
-		// If we're past half, flip the el.
-		if (pastHalf) {
-			flipping = true;
-			workEl.classList.toggle('flipped');
-			await Promise.delay(500);
-			workEl.scrollTop = flipped ? 0 : 99999;
-			flipping = false;
-
-			return;
-		}
+		// // If we're past half, flip the el.
+		// if (pastHalf) {
+		// 	flipping = true;
+		// 	workEl.classList.toggle('flipped');
+		// 	await Promise.delay(500);
+		// 	workEl.scrollTop = flipped ? 0 : 99999;
+		// 	flipping = false;
+		// }
 
 		// Scroll. If we've flipped, flip the scroll direction.
 		workEl.scrollTop += (dy * (flipped ? -1 : 1));
