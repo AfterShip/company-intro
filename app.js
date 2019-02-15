@@ -79,7 +79,7 @@ let done = false;
 let paused = false;
 let browserPrefix;
 // Wait for load to get started.
-window.addEventListener('load', function () {
+document.addEventListener('DOMContentLoaded', function () {
 	populateContainer();
 	preSetStyle();
 	getBrowserPrefix();
@@ -130,6 +130,9 @@ async function looseLayout() {
 	workEl.style.height = contentElH * workElHPer + 'px';
 
 	introEl.style.height = 'auto';
+
+	// tell outside it's ended
+	window.afAnimationEnd && window.afAnimationEnd();
 
 	// scroll to job introdution
 	const jobIntroPostion = document.querySelector('.jobs-info');
