@@ -128,6 +128,7 @@ async function looseLayout() {
 	window.onresize = null;
 	styleEl.style.height = contentElH * styleElHPer + 'px';
 	workEl.style.height = contentElH * workElHPer + 'px';
+	workEl.style.maxHeight = 'none'; // the original "60%" seems has problem
 
 	introEl.style.height = 'auto';
 
@@ -136,8 +137,8 @@ async function looseLayout() {
 
 	// scroll to job introdution
 	const jobIntroPostion = document.querySelector('.jobs-info');
-	await Promise.delay(4000);
-	runScroll(document.scrollingElement, 'cur', jobIntroPostion.offsetTop, 800);
+	await Promise.delay(3000);
+	runScroll(document.scrollingElement, 'cur', jobIntroPostion.offsetTop, 400);
 }
 
 // Skips all the animations.
@@ -162,6 +163,7 @@ async function surprisinglyShortAttentionSpan() {
 	for (let i = 0; i < introText[1].length; i++) {
 		introCEOHTML = handleTerminalChar(introCEOHTML, introText[1][i]);
 	}
+	introEl.innerHTML = '';
 	fastWrite(introEl, introCEOTitle);
 	fastWrite(introEl, introCEOHTML);
 
