@@ -23,7 +23,7 @@ import template from './lib/template';
 import {runScroll} from './lib/animate';
 
 import getPrefix from './lib/getPrefix';
-// import isMoblie from './lib/isMobile';
+import isMobile from './lib/isMobile';
 import getMd from './lib/getMd';
 
 import {workImgs, teddyImg, logoImg} from './lib/imgs';
@@ -66,6 +66,8 @@ const linkTypingChars = 2;
 
 const PAGE_PADDING = 12;
 let containerEl;
+let contentEl;
+let contentElH;
 let style;
 let styleEl;
 let workEl;
@@ -104,6 +106,7 @@ async function startAnimation() {
 		await fastWrite(introEl, introCEOTitle);
 		await writeTo(styleEl, styleText[4], 0, codeSpeed, true, 1); // nothing
 		await writeTo(introEl, introText[1], 0, endSpeed, 'terminal', wordsTypingChars); // CEO introduction
+		await looseLayout(); // remove the limit wrapper height
 		await writeTo(styleEl, styleText[5], 0, codeSpeed, true, 1); // end
 	} catch (e) {
 		// Flow control straight from the ghettos of Milwaukee
@@ -113,6 +116,21 @@ async function startAnimation() {
 			throw e;
 		}
 	}
+}
+
+// remove the limit wrapper height
+async function looseLayout() {
+	const isMob = isMobile();
+	const styleElHPer = isMob ? 0.25 : 0.6;
+	const workElHPer = isMob ? 0.35 : 0.6;
+
+	// const workElH = workEl.offsetHeight;
+	contentEl.style.height = 'auto';
+	window.onresize = null;
+	styleEl.style.height = contentElH * styleElHPer + 'px';
+	workEl.style.height = contentElH * workElHPer + 'px';
+
+	introEl.style.height = 'auto';
 }
 
 // Skips all the animations.
@@ -142,6 +160,8 @@ async function surprisinglyShortAttentionSpan() {
 
 	// work introduce
 	await addMoreWorkIntro(workEl, whyJoinUsHTML);
+
+	await looseLayout();
 
 	// There's a bit of a scroll problem with this thing
 	const start = Date.now();
@@ -318,9 +338,11 @@ async function addHtmlToFlippyElement(el, html, scrollParent) {
 
 function preSetStyle() {
 	const h = document.documentElement.clientHeight;
-	const contentEl = document.getElementById('content');
+	contentEl = document.getElementById('content');
 
-	contentEl.style.height = (h - PAGE_PADDING * 2 - containerEl.getBoundingClientRect().top) + 'px';
+	contentElH = (h - PAGE_PADDING * 2 - containerEl.getBoundingClientRect().top);
+
+	contentEl.style.height = contentElH + 'px';
 }
 
 //
