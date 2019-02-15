@@ -135,7 +135,7 @@ pre {
 
 #work-text .md {
 	transform: rotateY(180deg) rotateZ(180deg);
-	margin-top: 100px;
+	margin-top: 20px;/* gap */
 }
 
 @keyframes fadeIn {

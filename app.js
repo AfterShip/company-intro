@@ -316,7 +316,7 @@ async function addMoreWorkIntro(el, html) {
 }
 
 async function scrollToMdBottom(el, timing = 300) {
-	const gap = 100;
+	const gap = 20;
 	// const mdWrapper = el.querySelector('.text');
 	// const hMd = mdWrapper.offsetHeight;
 	const hMd = 0;
