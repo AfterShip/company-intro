@@ -400,6 +400,10 @@ function createEventHandlers() {
 			paused = true;
 		}
 	});
+
+	window.onresize = function () {
+		preSetStyle();
+	};
 }
 
 
