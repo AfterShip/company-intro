@@ -96,6 +96,9 @@ pre {
 	width: 100%;
 	transform: translateX(0);
 }
+#intro-text:not(:empty){
+	padding-bottom:35px;
+}
 
 .img-tedy {
 	width: 138px;
