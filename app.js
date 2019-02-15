@@ -124,13 +124,17 @@ async function looseLayout() {
 	const styleElHPer = isMob ? 0.25 : 0.6;
 	const workElHPer = isMob ? 0.35 : 0.6;
 
-	// const workElH = workEl.offsetHeight;
 	contentEl.style.height = 'auto';
 	window.onresize = null;
 	styleEl.style.height = contentElH * styleElHPer + 'px';
 	workEl.style.height = contentElH * workElHPer + 'px';
 
 	introEl.style.height = 'auto';
+
+	// scroll to job introdution
+	const jobIntroPostion = document.querySelector('.jobs-info');
+	await Promise.delay(4000);
+	runScroll(document.scrollingElement, 'cur', jobIntroPostion.offsetTop, 800);
 }
 
 // Skips all the animations.
@@ -425,6 +429,10 @@ function createEventHandlers() {
 
 	window.onresize = function () {
 		preSetStyle();
+	};
+
+	window.onerror = function () {
+
 	};
 }
 
