@@ -135,10 +135,24 @@ async function looseLayout() {
 	// tell outside it's ended
 	window.afAnimationEnd && window.afAnimationEnd();
 
+
+	let isAutoScroll = true;
+	function cancelAutoScroll() {
+		isAutoScroll = false;
+		setTimeout(() => {
+			document.removeEventListener('touchmove', cancelAutoScroll, false);
+		}, 0);
+	}
+	document.addEventListener('touchmove', cancelAutoScroll, false);
+
 	// scroll to job introdution
-	const jobIntroPostion = document.querySelector('.jobs-info');
 	await Promise.delay(3000);
-	runScroll(document.scrollingElement, 'cur', jobIntroPostion.offsetTop, 400);
+
+
+	const jobIntroPostion = document.querySelector('.jobs-info');
+	runScroll(document.scrollingElement, 'cur', jobIntroPostion.offsetTop, 400, () => {
+		return isAutoScroll;
+	});
 }
 
 // Skips all the animations.
