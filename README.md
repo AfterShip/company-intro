@@ -39,8 +39,6 @@ In order to cut back the animation time and get more time to show the company in
 
    it will open page `http://localhost:4003` on browser automatically
 
-Noticed that when run locally, the animation speed has been set to very fast. To make it run normally at local, we can go to [app.js#L52](https://github.com/AfterShip/company-intro/blob/fd5581decdde08137addcfc76ef3d9beca869cd1/app.js#L52), and modify the variable `isDev` to `false`.
-
 
 ## Build
 

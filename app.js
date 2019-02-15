@@ -106,7 +106,7 @@ async function startAnimation() {
 		await fastWrite(introEl, introCEOTitle);
 		await writeTo(styleEl, styleText[4], 0, codeSpeed, true, 1); // nothing
 		await writeTo(introEl, introText[1], 0, endSpeed, 'terminal', wordsTypingChars); // CEO introduction
-		await looseLayout(); // remove the limit wrapper height
+		looseLayout(); // remove the limit wrapper height
 		await writeTo(styleEl, styleText[5], 0, codeSpeed, true, 1); // end
 	} catch (e) {
 		// Flow control straight from the ghettos of Milwaukee
