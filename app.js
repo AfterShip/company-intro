@@ -204,7 +204,7 @@ function checkIsLink(originalCharsPerInterval) {
 }
 
 function writeTo(...arg) {
-	const [,,,, mirrorToStyle, charsPerInterval, rules] = arg;
+	const [, , , , mirrorToStyle, charsPerInterval, rules] = arg;
 	// remove rule
 	const passingArg = arg.slice(0, 6);
 
@@ -296,7 +296,7 @@ async function addMoreWorkIntro(el, html) {
 }
 
 async function scrollToMdBottom(el, timing = 300) {
-	const gap = 800;
+	const gap = 500;
 	const mdWrapper = el.querySelector('.text');
 	const hMd = mdWrapper.offsetHeight;
 
@@ -418,8 +418,16 @@ function createWorkBox() {
 
 
 	// flippy floppy
-	let flipping = 0;
+	let flipping = false;
+	// when can trigger mouse wheel, we need to disable browser's default scrolling
+	let disableOriginalScroll = false;
+
 	require('mouse-wheel')(workEl, async function (dx, dy) {
+		if (!disableOriginalScroll) {
+			disableOriginalScroll = true;
+			workEl.style.overflow = 'hidden';
+		}
+
 		if (flipping) return;
 		const flipped = workEl.classList.contains('flipped');
 		const half = (workEl.scrollHeight - workEl.clientHeight) / 2;
@@ -427,11 +435,13 @@ function createWorkBox() {
 
 		// If we're past half, flip the el.
 		if (pastHalf) {
-			workEl.classList.toggle('flipped');
 			flipping = true;
+			workEl.classList.toggle('flipped');
 			await Promise.delay(500);
 			workEl.scrollTop = flipped ? 0 : 99999;
 			flipping = false;
+
+			return;
 		}
 
 		// Scroll. If we've flipped, flip the scroll direction.
