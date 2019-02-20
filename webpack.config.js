@@ -4,6 +4,7 @@ const path = require('path');
 
 // Builds bundle usable inside <script>.
 module.exports = {
+	mode: process.env.NODE_ENV || 'production',
 	context: __dirname,
 	entry: {
 		'app': './app.js',
@@ -16,7 +17,7 @@ module.exports = {
 	},
 	devtool: 'source-map',
 	module: {
-		loaders: [
+		rules: [
 
 			{
 				test: /\.js?$/,
