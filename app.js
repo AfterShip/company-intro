@@ -150,7 +150,7 @@ async function looseLayout() {
 
 
 	const jobIntroPostion = document.querySelector('.jobs-info');
-	runScroll(document.scrollingElement, 'cur', jobIntroPostion.offsetTop, 400, () => {
+	jobIntroPostion && runScroll(document.scrollingElement, 'cur', jobIntroPostion.offsetTop, 400, () => {
 		return isAutoScroll;
 	});
 }
