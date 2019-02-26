@@ -5,6 +5,8 @@
 	margin: 0 auto;
 	max-width:1200px;
 	font-size: 14px;
+	letter-spacing: initial;
+    line-height: 1.444;
 	-webkit-perspective: 1000px;
 	perspective: 1000px;
 	padding: 12px '$bodyPaddingLeftRig' 20px;
@@ -13,6 +15,13 @@
 .af * {
 	box-sizing: border-box;
 }
+/* reset */
+.af p, .af ul{
+	font-size: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+}
+
 /* be ware of polluted */
 pre {
 	overflow: auto;
