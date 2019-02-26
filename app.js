@@ -53,10 +53,10 @@ const speed = isDev ? 0 : 16;
 
 // Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
 const codeSpeed = speed * 0;
-const codeCommentSpeed = speed * 1;
-const wordsSpeed = speed * 1;
-const beginingSpeed = speed * 2;
-const endSpeed = speed * 2;
+const codeCommentSpeed = speed * 0.5;
+const wordsSpeed = speed * 0.5;
+const beginingSpeed = speed * 1;
+const endSpeed = speed * 1;
 
 
 // Chars per type: words comment * 1  link code * 2
