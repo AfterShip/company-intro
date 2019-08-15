@@ -1,19 +1,20 @@
 
-AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟踪、订单打印和退换货管理实现自动化，来提升消费者对品牌的满意度和忠诚度。
+AfterShip（爱客科技）是一个为国际性电商企业而设的 B2B SaaS 平台，通过提供全方位和全自动化的工具，帮助电商降低营运成本及实现智能营销。公司全自动化系统涵盖市场推广、订单管理、运单打印、快递跟踪及退换货管理等。
 
 ## 部分客户
 
 * Amazon
 * eBay
 * Wish
-* IKEA
-* Groupon
+* Shopee
 * Paypal
-* Etsy 
+* IKEA
+* Tesla 
+
 
 ## 产品数据
 
-* 每分钟 10 万+ API 请求
+* 每月 10 亿+ API 请求
 * 每月 20 亿+ 数据
 * 每月 5 千万+ 包裹查询
 * 每月网页 PV 5 千万+
@@ -36,10 +37,10 @@ AfterShip 是一个国际性 SaaS 平台，主要帮助 B 端电商把快递跟�
 
 ## 使用的技术 
 
-* **开发语言:** JavaScript (Node.js), Python, PHP
+* **开发语言:** Go, JavaScript (Node.js), Python, PHP
 * **最新技术:** Kubernetes, TensorFlow, Serverless, Microservice
 * **应用框架:** React.js, Koa.js, Tornado, Scrapy
-* **数据库:**   MongoDB, Redis, GCP Spanner, AWS Dynamodb
+* **数据库:**   MongoDB, Redis, GCP Spanner, Elasticsearch
 * **云服务器:** AWS, GCP
 * **开发工具:** GitHub, JIRA, Jenkins 
 * **监控工具:** New Relic, PagerDuty, Statuspage, Pingdom
