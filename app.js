@@ -53,10 +53,10 @@ const speed = isDev ? 0 : 16;
 
 // Type speed: code * 0.5  comment * 1  words * 1.5  begining * 2.5
 const codeSpeed = speed * 0;
-const codeCommentSpeed = speed * 0.5;
+const codeCommentSpeed = speed * 0.2;
 const wordsSpeed = speed * 0.5;
-const beginingSpeed = speed * 1;
-const endSpeed = speed * 1;
+const beginingSpeed = speed * 0.5;
+const endSpeed = speed * 0.5;
 
 
 // Chars per type: words comment * 1  link code * 2
@@ -317,7 +317,7 @@ async function doWriteTo(
 			.map(pulgin => pulgin(thisSlice))
 			.find(val => val !== null) || charsPerInterval;
 
-		if (comma.test(thisSlice)) thisInterval = interval * 8;
+		if (comma.test(thisSlice)) thisInterval = interval * 4;
 		else if (endOfSentence.test(thisSlice)) thisInterval = interval * 15;
 		else if (endOfBlock.test(thisSlice)) thisInterval = interval * 20;
 
