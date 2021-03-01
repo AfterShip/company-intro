@@ -32,10 +32,10 @@ import easterEgg from './lib/easterEgg';
 import ga from './lib/ga';
 
 const workText = [0].map(function (i) {
-	return require('./views/work' + i + '.md');
+	return require('./views/work' + i + '.md').default;
 });
 const introText = [0, 1].map(function (i) {
-	return require('./views/intro' + i + '.md');
+	return require('./views/intro' + i + '.md').default;
 });
 
 // image element
@@ -43,7 +43,7 @@ const aftershipTitle = template(workTextTitleRaw, {logoImg});
 const introCEOTitle = template(introCEOTitleRaw, {teddyImg});
 
 let styleText = [0, 1, 2, 3, 4, 5, 6].map(function (i) {
-	const txt = require('./styles/styles' + i + '.css');
+	const {default: txt} = require('./styles/styles' + i + '.css');
 	return insetStyleVariable(txt);
 });
 

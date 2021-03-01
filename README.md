@@ -31,11 +31,11 @@ In order to cut back the animation time and get more time to show the company in
 
 * Install dependencies:
 	
-	`npm install` or `yarn install`
+	`yarn install`
 
 * Then run it locally:
   
-   `npm run dev` or `yarn dev`
+    `yarn dev`
 
    it will open page `http://localhost:4003` on browser automatically
 
