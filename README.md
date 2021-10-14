@@ -1,7 +1,6 @@
 # introduction-company-hiring
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-[![Build Status](https://travis-ci.com/AfterShip/company-intro.svg?token=DEzyyuVSmnezkFBUNRvc&branch=master)](https://travis-ci.com/AfterShip/company-intro)
 [![JavaScript Style](https://img.shields.io/badge/code%20style-aftership-brightgreen.svg)](https://github.com/AfterShip/eslint-config-aftership)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg) 
 
