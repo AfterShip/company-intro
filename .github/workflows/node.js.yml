@@ -1,0 +1,69 @@
+name: Node.js CI
+on:
+    push:
+        branches: [main, master, testing/*, release/*]
+    pull_request:
+        branches: [main, master, testing/*, release/*]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy: {matrix: {node-version: [14.x]}}
+        steps:
+          
+            - uses: actions/checkout@v2
+          
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
+          
+            - name: Use NPM Token
+              uses: dkershner6/use-npm-token-action@v1
+              with:
+                  token: ${{ secrets.NPM_TOKEN }}
+                  workspace: ./
+          
+            - name: Yarn install
+              run: yarn install --no-optional --pure-lockfile > /dev/null
+          
+            - name: Typescript check
+              run: yarn tsc
+          
+            - name: SonarQube Scan On PR
+              if: ${{ github.event_name == 'pull_request' }}
+              uses: sonarsource/sonarqube-scan-action@master
+              with:
+                  projectBaseDir: .
+                  args: >
+                      -Dsonar.exclusions=**/__tests__/**,**/*.test.ts,node_modules/**,dist/**,scripts/**,test/**,tests/**,build/**,config/**,cypress/**
+                      -Dsonar.projectKey=company-intro
+                      -Dsonar.pullrequest.provider=github
+                      -Dsonar.pullrequest.github.repository=${{ github.repository }}
+                      -Dsonar.pullrequest.key=${{ github.event.number }}
+                      -Dsonar.pullrequest.branch=PR
+                      -Dsonar.pullrequest.base=${{ github.base_ref }}
+                      -Dsonar.qualitygate.wait=true
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                  SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          
+            - name: Get branch name (merge)
+              if: ${{ github.event_name != 'pull_request' }}
+              shell: bash
+              run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+          
+            - name: SonarQube Scan On Push
+              if: ${{ github.event_name != 'pull_request' }}
+              uses: sonarsource/sonarqube-scan-action@master
+              with:
+                  projectBaseDir: .
+                  args: >
+                      -Dsonar.exclusions=**/__tests__/**,**/*.test.ts,node_modules/**,dist/**,scripts/**,test/**,tests/**,build/**,config/**,cypress/**
+                      -Dsonar.projectKey=company-intro
+                      -Dsonar.pullrequest.provider=github
+                      -Dsonar.pullrequest.github.repository=${{ github.repository }}
+                      -Dsonar.branch.name=${{ env.BRANCH_NAME }}
+                      -Dsonar.qualitygate.wait=true
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                  SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
